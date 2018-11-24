@@ -9,8 +9,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 
 import mainListItems from './ItemsNavBar';
-import SimpleLineChart from '../../Components/SimpleLineChart';
-import SimpleTable from '../../Components/SimpleTable';
+import Router from '../../Router/Router';
 
 const drawerWidth = 240;
 
@@ -91,7 +90,11 @@ const styles = theme => ({
   },
 });
 
-class Layout extends React.Component {
+
+type Props = {
+    classes: {},
+};
+class Layout extends React.Component<Props> {
   constructor(props) {
     super(props);
     this.state = {
@@ -162,27 +165,14 @@ class Layout extends React.Component {
             <List>{mainListItems}</List>
           </Drawer>
           <main className={classes.content}>
-            <div className={classes.appBarSpacer} />
-            <Typography variant="h4" gutterBottom component="h2">
-                        Orders
-            </Typography>
-            <Typography component="div" className={classes.chartContainer}>
-              <SimpleLineChart />
-            </Typography>
-            <Typography variant="h4" gutterBottom component="h2">
-                        Products
-            </Typography>
-            <div className={classes.tableContainer}>
-              <SimpleTable />
-            </div>
+            <Router />
           </main>
         </div>
       );
     }
 }
 
-Layout.propTypes = {
-  classes: {}.isRequired,
-};
+
+
 
 export default withStyles(styles)(Layout);
