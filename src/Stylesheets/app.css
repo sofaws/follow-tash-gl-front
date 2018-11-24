@@ -1,0 +1,34 @@
+.root {
+  display: flex;
+}
+.hide{
+  display: none!important;
+}
+.toolbar{
+ padding-right: 24px;
+}
+.menuButton{
+  margin-left: 12px;
+  margin-right: 36px;
+}
+.grow{
+  flex-grow: 1;
+}
+.bold{
+  font-weight: bold!important;
+}
+.flexCenter {
+  display: flex;
+  justify-content: center;
+}
+.flexEnd {
+  display: flex;
+  justify-content: flex-end;
+}
+.flexEvenly {
+  display: flex;
+  justify-content: space-evenly;
+}
+.padding4{
+  padding: 4px;
+}
