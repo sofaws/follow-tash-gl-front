@@ -14,6 +14,9 @@
 .grow{
   flex-grow: 1;
 }
+.bold{
+  font-weight: bold!important;
+}
 .flexCenter {
   display: flex;
   justify-content: center;
@@ -21,6 +24,10 @@
 .flexEnd {
   display: flex;
   justify-content: flex-end;
+}
+.flexEvenly {
+  display: flex;
+  justify-content: space-evenly;
 }
 .padding4{
   padding: 4px;
