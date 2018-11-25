@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import {
   FormControl, InputLabel, Select, Input, Chip, MenuItem,
@@ -25,6 +24,7 @@ const styles = {
 
 
 const STATUS = [
+  'opened',
   'En cours',
   'Fini',
   'Bloqué',

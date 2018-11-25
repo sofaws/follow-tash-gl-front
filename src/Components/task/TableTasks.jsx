@@ -3,7 +3,7 @@ import { withStyles } from '@material-ui/core/styles';
 import {
   Table, TableBody, TableCell, TableHead, TableRow, Paper,
 } from '@material-ui/core';
-import { secondsToHms } from '../Utils/TimeHelper';
+import { secondsToHms } from '../../Utils/TimeHelper';
 
 const styles = {
   root: {
@@ -49,13 +49,13 @@ function TableTasks(props: Props) {
           {data.map(n => (
             <TableRow key={n.id}>
               <TableCell component="th" scope="row">
-                {n.id}
+                {n.iid}
               </TableCell>
               <TableCell>{n.title}</TableCell>
-              <TableCell>{n.status}</TableCell>
-              <TableCell>{n.assignee}</TableCell>
-              <TableCell>{n.estimated}</TableCell>
-              <TableCell>{n.inputed}</TableCell>
+              <TableCell>{n.state}</TableCell>
+              <TableCell>{n.assignee ? n.assignee.name : 'Aucun'}</TableCell>
+              <TableCell>{n.time_stats.human_time_estimate || 'Non éstimée'}</TableCell>
+              <TableCell>{n.time_stats.human_time_spent || '00h00'}</TableCell>
               <TableCell>{n.raf}</TableCell>
               <TableCell>{n.avancement}</TableCell>
               <TableCell className={n.derapage > 0 ? classes.derapageBad : classes.derapageGood}>

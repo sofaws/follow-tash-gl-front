@@ -1,38 +1,26 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles/index';
-import TableTasks from '../../Components/TableTasks';
-import FilterStatus from '../../Components/FilterStatus';
+import Grid from '@material-ui/core/es/Grid/Grid';
+import TableTasks from '../../Components/task/TableTasks';
+import FilterStatus from '../../Components/task/FilterStatus';
 import api from '../../Utils/Api';
+import FilterText from '../../Components/task/FilterText';
 
 const styles = {
   container: {
   },
 };
 
-let id = 0;
-function createData(title, status, assignee, estimated, inputed, raf, avancement, derapage) {
-  id += 1;
-  return {
-    id, title, status, assignee, estimated, inputed, raf, avancement, derapage,
-  };
-}
-
-const data = [
-  createData('Création d\'un bouton inscription', 'En cours', 'Lisa Mounier', '08h00', '12h00', '02:00', '80%', 10393),
-  createData('Création d\'un bouton connexion', 'En cours', 'Maxime Chabert', '08h00', '12h00', '02:00', '80%', 8293),
-  createData('Création d\'un bouton déconnexion', 'Fini', 'Maxime Blanc', '08h00', '06h00', '00:00', '100%', -8392),
-];
-
 
 type Props = {
     classes: {},
 };
 
-
 class TaskContainer extends React.Component<Props> {
     state = {
       status: [],
       data: [],
+      filterText: '',
     };
 
     async componentDidMount() {
@@ -42,23 +30,40 @@ class TaskContainer extends React.Component<Props> {
       });
     }
 
-    filterData = data => data.filter(element => this.state.status.length === 0 || this.state.status.includes(element.status));
+    filterData = () => {
+      const { data, status, filterText } = this.state;
+      const filterTextUppercase = filterText.toUpperCase();
+      return data.filter(
+        element => (status.length === 0 || status.includes(element.state))
+            && (filterText === '' || element.title.toUpperCase().includes(filterTextUppercase)
+            || (element.assignee
+                    && element.assignee.name.toUpperCase().includes(filterTextUppercase))
+            ),
+      );
+    }
 
-    handleChange = (event) => {
-      this.setState({ status: event.target.value });
+    handleChangeFilter = name => (event) => {
+      this.setState({ [name]: event.target.value });
     };
+
 
     render() {
       const { classes } = this.props;
-      const { status } = this.state;
-      /**
-         * @Todo change constante data by state data
-         */
-      const dataFilter = this.filterData(data);
+      const { status, filterText } = this.state;
+
+      const dataFilter = this.filterData();
 
       return (
         <div className={classes.container}>
-          <FilterStatus name={status} handleChange={this.handleChange} />
+          <Grid
+            container
+            direction="row"
+            justify="flex-start"
+            alignItems="center"
+          >
+            <FilterStatus name={status} handleChange={this.handleChangeFilter('status')} />
+            <FilterText name={filterText} handleChange={this.handleChangeFilter('filterText')} />
+          </Grid>
           <TableTasks data={dataFilter} />
         </div>
       );
