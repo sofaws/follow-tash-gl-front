@@ -1,7 +1,7 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import {
-  Table, TableBody, TableCell, TableHead, TableRow, Paper,
+  Table, TableBody, TableCell, TableHead, TableRow, Paper, Avatar,
 } from '@material-ui/core';
 import { secondsToHms } from '../../Utils/TimeHelper';
 
@@ -18,6 +18,16 @@ const styles = {
   },
   derapageGood: {
     color: 'green',
+  },
+  avatar: {
+    marginRight: 10,
+    width: 30,
+    height: 30,
+  },
+  row: {
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
   },
 };
 
@@ -53,7 +63,14 @@ function TableTasks(props: Props) {
               </TableCell>
               <TableCell>{n.title}</TableCell>
               <TableCell>{n.state}</TableCell>
-              <TableCell>{n.assignee ? n.assignee.name : 'Aucun'}</TableCell>
+              <TableCell>
+                {n.assignee ? (
+                  <div className={classes.row}>
+                    <Avatar alt={n.assignee.name} src={n.assignee.avatar_url} className={classes.avatar} />
+                    <span>{n.assignee.name}</span>
+                  </div>
+                ) : 'Aucun'}
+              </TableCell>
               <TableCell>{n.time_stats.human_time_estimate || 'Non éstimée'}</TableCell>
               <TableCell>{n.time_stats.human_time_spent || '00h00'}</TableCell>
               <TableCell>{n.raf}</TableCell>
