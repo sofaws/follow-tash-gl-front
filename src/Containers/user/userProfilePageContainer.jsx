@@ -5,19 +5,25 @@ import Typography from '@material-ui/core/Typography';
 
 const dummyData = [
     {
-        name:"Tâche1",
-        real:"10:40",
-        estimated:"11:00",
+        id: 45,
+        title:"Tâche1",
+        description: "looool",
+        webUrl: "https://gitlab.com/institut-g4-lyon/on-teste-des-trucs/issues/3",
+        spentTime: 5400,
+        estimatedTime: 7200,
     },
     {
-        name:"Tâche2",
-        real:"10:40",
-        estimated:"11:00",
+        title:"Tâche2",
+        description: "looool",
+        webUrl: "https://gitlab.com/institut-g4-lyon/on-teste-des-trucs/issues/3",
+        spentTime: 5400,
+        estimatedTime:7200,
     },
     {
-        name:"Tâche3",
-        real:"10:40",
-        estimated:"11:00",
+        title:"Tâche3",
+        webUrl: "https://gitlab.com/institut-g4-lyon/on-teste-des-trucs/issues/3",
+        spentTime:5400,
+        estimatedTime:7200,
     },
 ]
 class UserProfilePageContainer extends React.Component {
