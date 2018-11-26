@@ -6,10 +6,13 @@ import Chip from '@material-ui/core/Chip';
 import Icon from '@material-ui/core/Icon';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import CardActions from '@material-ui/core/CardActions';
 import './activeTaskStyle.css';
 import { secondsToHms } from "../../Utils/TimeHelper";
 import { TASK_DETAIL_PAGE_URL } from "../../Constants/routeName";
 import { Link } from 'react-router-dom';
+
+
 interface TaskInterface {
   id: number;
   iid: number;
@@ -31,9 +34,7 @@ export const activeTaskComponent = ({task}: Props) => (
           <Typography variant="h5" component="h2">
             {task.title}
           </Typography>
-            <Button  size="small" variant="outlined" href={task.webUrl}>
-              Issue
-            </Button>
+
         </Grid>
         <Grid item sm={1}>
             <Link to={`/${TASK_DETAIL_PAGE_URL}/:${task.iid}`} className="navBar">
@@ -61,6 +62,10 @@ export const activeTaskComponent = ({task}: Props) => (
         />
       </div>
     </CardContent>
-
+      <CardActions>
+          <Button  size="small" variant="outlined" href={task.webUrl}>
+              Issue
+          </Button>
+      </CardActions>
   </Card>
 );
