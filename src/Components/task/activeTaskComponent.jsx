@@ -8,9 +8,11 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import './activeTaskStyle.css';
 import { secondsToHms } from "../../Utils/TimeHelper";
-
+import { TASK_DETAIL_PAGE_URL } from "../../Constants/routeName";
+import { Link } from 'react-router-dom';
 interface TaskInterface {
   id: number;
+  iid: number;
   title: string;
   description: string;
   labels: {};
@@ -29,11 +31,16 @@ export const activeTaskComponent = ({task}: Props) => (
           <Typography variant="h5" component="h2">
             {task.title}
           </Typography>
+            <Button  size="small" variant="outlined" href={task.webUrl}>
+              Issue
+            </Button>
         </Grid>
         <Grid item sm={1}>
-          <Button variant="fab" mini color="secondary" aria-label="More info" href={task.webUrl}>
+            <Link to={`/${TASK_DETAIL_PAGE_URL}/:${task.iid}`} className="navBar">
+          <Button variant="fab" mini color="secondary" aria-label="More info">
             <Icon>show_chart</Icon>
           </Button>
+            </Link>
         </Grid>
       </Grid>
     </CardContent>

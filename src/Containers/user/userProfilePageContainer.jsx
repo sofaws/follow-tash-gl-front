@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 const dummyData = [
     {
         id: 45,
+        iid: 235,
         title:"Tâche1",
         description: "looool",
         webUrl: "https://gitlab.com/institut-g4-lyon/on-teste-des-trucs/issues/3",
@@ -13,6 +14,8 @@ const dummyData = [
         estimatedTime: 7200,
     },
     {
+        id:523,
+        iid: 225,
         title:"Tâche2",
         description: "looool",
         webUrl: "https://gitlab.com/institut-g4-lyon/on-teste-des-trucs/issues/3",
@@ -20,6 +23,8 @@ const dummyData = [
         estimatedTime:7200,
     },
     {
+        id:351,
+        iid: 211,
         title:"Tâche3",
         webUrl: "https://gitlab.com/institut-g4-lyon/on-teste-des-trucs/issues/3",
         spentTime:5400,
