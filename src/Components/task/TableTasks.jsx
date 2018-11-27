@@ -3,8 +3,11 @@ import { withStyles } from '@material-ui/core/styles';
 import {
   Table, TableBody, TableCell, TableHead, TableRow, Paper, Avatar,
 } from '@material-ui/core';
+import { withRouter } from 'react-router-dom';
 import { secondsToHms } from '../../Utils/TimeHelper';
-import {getStatus} from "../../Utils/TaskHelper";
+import { getStatus } from '../../Utils/TaskHelper';
+import { getRouteWithParams } from '../../Utils/RouterHelper';
+import { TASK_PAGE_URL } from '../../Constants/routeName';
 
 const styles = {
   root: {
@@ -30,17 +33,20 @@ const styles = {
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
+  tableRow: {
+    cursor: 'pointer',
+  },
 };
 
 type Props = {
     classes: {},
     data: [],
+    history: () => void,
 };
 
 
-
 function TableTasks(props: Props) {
-  const { classes, data } = props;
+  const { classes, data, history } = props;
 
   return (
     <Paper className={classes.root}>
@@ -60,7 +66,7 @@ function TableTasks(props: Props) {
         </TableHead>
         <TableBody>
           {data.map(n => (
-            <TableRow key={n.id}>
+            <TableRow className={classes.tableRow} key={n.id} onClick={() => history.push(getRouteWithParams(TASK_PAGE_URL, { id: n.iid }))} hover>
               <TableCell component="th" scope="row">
                 {n.iid}
               </TableCell>
@@ -72,7 +78,7 @@ function TableTasks(props: Props) {
                     <Avatar alt={n.assignee.name} src={n.assignee.avatar_url} className={classes.avatar} />
                     <span>{n.assignee.name}</span>
                   </div>
-                ) : 'Aucun'}
+                ) : 'Aucun assigné'}
               </TableCell>
               <TableCell>{n.time_stats.human_time_estimate || 'Non éstimée'}</TableCell>
               <TableCell>{n.time_stats.human_time_spent || '00h00'}</TableCell>
@@ -89,4 +95,4 @@ function TableTasks(props: Props) {
   );
 }
 
-export default withStyles(styles)(TableTasks);
+export default withRouter(withStyles(styles)(TableTasks));

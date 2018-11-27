@@ -20,21 +20,21 @@ type Props = {
 class TasksContainer extends React.Component<Props> {
     state = {
       status: [],
-      data: [],
+        tasks: [],
       filterText: '',
     };
 
     async componentDidMount() {
-      const res = await api.get('tasks').json();
+      const tasks = await api.get('tasks').json();
       this.setState({
-        data: res,
+          tasks,
       });
     }
 
-    filterData = () => {
-      const { data, status, filterText } = this.state;
+    filterTasks = () => {
+      const { tasks, status, filterText } = this.state;
       const filterTextUppercase = filterText.toUpperCase();
-      return data.filter(
+      return tasks.filter(
         element => (status.length === 0
             || status.includes(getStatus(element.labels, element.state)))
             && (filterText === '' || element.title.toUpperCase().includes(filterTextUppercase)
@@ -42,19 +42,16 @@ class TasksContainer extends React.Component<Props> {
                     && element.assignee.name.toUpperCase().includes(filterTextUppercase))
             ),
       );
-    }
+    };
 
     handleChangeFilter = name => (event) => {
       this.setState({ [name]: event.target.value });
     };
 
-
     render() {
       const { classes } = this.props;
       const { status, filterText } = this.state;
-
-      const dataFilter = this.filterData();
-
+      const tasksFilter = this.filterTasks();
       return (
         <div className={classes.container}>
           <Grid
@@ -66,7 +63,7 @@ class TasksContainer extends React.Component<Props> {
             <FilterStatus name={status} handleChange={this.handleChangeFilter('status')} />
             <FilterText name={filterText} handleChange={this.handleChangeFilter('filterText')} />
           </Grid>
-          <TableTasks data={dataFilter} />
+          <TableTasks data={tasksFilter} />
         </div>
       );
     }

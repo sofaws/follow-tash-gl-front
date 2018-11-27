@@ -13,4 +13,3 @@ export function secondsToHms(d: number) {
   const mDisplay = m > 0 ? m : '00';
   return hDisplay + mDisplay;
 }
-
