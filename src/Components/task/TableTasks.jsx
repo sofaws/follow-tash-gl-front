@@ -4,6 +4,7 @@ import {
   Table, TableBody, TableCell, TableHead, TableRow, Paper, Avatar,
 } from '@material-ui/core';
 import { secondsToHms } from '../../Utils/TimeHelper';
+import {getStatus} from "../../Utils/TaskHelper";
 
 const styles = {
   root: {
@@ -36,6 +37,8 @@ type Props = {
     data: [],
 };
 
+
+
 function TableTasks(props: Props) {
   const { classes, data } = props;
 
@@ -62,7 +65,7 @@ function TableTasks(props: Props) {
                 {n.iid}
               </TableCell>
               <TableCell>{n.title}</TableCell>
-              <TableCell>{n.state}</TableCell>
+              <TableCell>{getStatus(n.labels, n.state)}</TableCell>
               <TableCell>
                 {n.assignee ? (
                   <div className={classes.row}>

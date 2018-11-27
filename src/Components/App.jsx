@@ -6,19 +6,19 @@ import {
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
+import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles/index';
 import mainListItems from './navbar/navbarListComponent';
 import UserProfilePageContainer from '../Containers/user/userProfilePageContainer';
 import HomeContainer from '../Containers/home/homeContainer';
-import TaskContainer from '../Containers/task/taskContainer';
+import TasksContainer from '../Containers/tasks/tasksContainer';
+import TaskContainer from '../Containers/tasks/taskContainer';
 import '../Stylesheets/app.css';
-import classNames from 'classnames';
-import { HOME_PAGE_URL, TASKS_PAGE_URL, USERS_PAGE_URL } from '../Constants/routeName';
+import {HOME_PAGE_URL, TASK_PAGE_URL, TASKS_PAGE_URL, USERS_PAGE_URL} from '../Constants/routeName';
 
 const drawerWidth = 240;
 
 const styles = theme => ({
-
   toolbarIcon: {
     display: 'flex',
     alignItems: 'center',
@@ -142,8 +142,9 @@ class AppComp extends React.Component {
             <section id="container">
               <Switch>
                 {this.createRoute(HOME_PAGE_URL, HomeContainer)}
-                {this.createRoute(TASKS_PAGE_URL, TaskContainer)}
+                {this.createRoute(TASKS_PAGE_URL, TasksContainer)}
                 {this.createRoute(USERS_PAGE_URL, UserProfilePageContainer)}
+                {this.createRoute(TASK_PAGE_URL, TaskContainer)}
               </Switch>
             </section>
           </main>

@@ -5,6 +5,7 @@ import TableTasks from '../../Components/task/TableTasks';
 import FilterStatus from '../../Components/task/FilterStatus';
 import api from '../../Utils/Api';
 import FilterText from '../../Components/task/FilterText';
+import { getStatus } from '../../Utils/TaskHelper';
 
 const styles = {
   container: {
@@ -16,7 +17,7 @@ type Props = {
     classes: {},
 };
 
-class TaskContainer extends React.Component<Props> {
+class TasksContainer extends React.Component<Props> {
     state = {
       status: [],
       data: [],
@@ -34,7 +35,8 @@ class TaskContainer extends React.Component<Props> {
       const { data, status, filterText } = this.state;
       const filterTextUppercase = filterText.toUpperCase();
       return data.filter(
-        element => (status.length === 0 || status.includes(element.state))
+        element => (status.length === 0
+            || status.includes(getStatus(element.labels, element.state)))
             && (filterText === '' || element.title.toUpperCase().includes(filterTextUppercase)
             || (element.assignee
                     && element.assignee.name.toUpperCase().includes(filterTextUppercase))
@@ -70,4 +72,4 @@ class TaskContainer extends React.Component<Props> {
     }
 }
 
-export default withStyles(styles)(TaskContainer);
+export default withStyles(styles)(TasksContainer);
