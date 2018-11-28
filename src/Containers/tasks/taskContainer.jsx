@@ -14,6 +14,10 @@ import red from '@material-ui/core/colors/red';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Chip from '@material-ui/core/es/Chip/Chip';
 import ImputationCard from '../../Components/task/ImputationCard';
+import api from '../../Utils/Api';
+import {getStatus, getTypeTask} from '../../Utils/TaskHelper';
+import { secondsToHms } from '../../Utils/TimeHelper';
+import {getPourcentProgress, getSumConsomned} from '../../Utils/ManagementHelper';
 
 const styles = theme => ({
   card: {
@@ -50,10 +54,24 @@ const styles = theme => ({
 
 type Props = {
     classes: {},
+    match: {
+        params: {
+            id: number
+        }
+    }
 };
 
 class TaskContainer extends React.Component<Props> {
-    state = { expanded: false };
+    state = { expanded: false, task: {}, isLoad: false };
+
+    async componentDidMount() {
+      const task = await api.get(`tasks/${this.props.match.params.id}`).json();
+      console.log(task);
+      this.setState({
+        task,
+        isLoad: true,
+      });
+    }
 
     handleExpandClick = () => {
       this.setState(state => ({ expanded: !state.expanded }));
@@ -61,7 +79,9 @@ class TaskContainer extends React.Component<Props> {
 
     render() {
       const { classes } = this.props;
+      const { task, isLoad } = this.state;
 
+      if (!isLoad) return null;
       return (
         <Card className={classes.card}>
           <CardHeader
@@ -70,27 +90,54 @@ class TaskContainer extends React.Component<Props> {
                             R
               </Avatar>
                     )}
-            title="Développer une page de connexion"
+            title={task.title}
             subheader="Maxime Chabert"
           />
           <CardContent>
             <Typography component="p">
-                        Description de l'issue, ici on donne plein d'informations sur comment accomplir la tache, le
-                        fonctionnel, le technique etc.
+              { task.description }
             </Typography>
           </CardContent>
           <CardActions className={classes.actions} disableActionSpacing>
             <Chip
-              label="Todo"
+              label={getStatus(task.labels, task.state)}
               className={classes.chip}
               color="secondary"
             />
-            <Chip label="Front" className={classes.chip} variant="outlined" />
-            <Chip label="Ilôt 1" className={classes.chip} variant="outlined" />
-            <Chip label="2h00 estimées" className={classes.chip} variant="outlined" />
-            <Chip label="3h45 consomnées" className={classes.chip} variant="outlined" />
-            <Chip label="89% avancement" className={classes.chip} variant="outlined" />
-            <Chip label="2h30 RAF" className={classes.chip} variant="outlined" />
+              <Chip
+                  label={getTypeTask(task.labels) || "Aucun type"}
+                  className={classes.chip}
+                  color="primary"
+              />
+            <Chip
+              label={task.estimatedTime
+                ? `${secondsToHms(task.estimatedTime)} estimées`
+                : 'Non estimé'}
+              className={classes.chip}
+              variant="outlined"
+            />
+            <Chip
+              label={task.consumedTime
+                ? `${secondsToHms(getSumConsomned(task.consumedTime))} consomnées`
+                : '00h00 consomnées'}
+              className={classes.chip}
+              variant="outlined"
+            />
+            <Chip
+              label={task.remainingTime
+                ? `${secondsToHms(task.remainingTime)} RAF`
+                : 'RAF non renseigné'}
+              className={classes.chip}
+              variant="outlined"
+            />
+            <Chip
+              label={task.remainingTime
+                ? `${getPourcentProgress(getSumConsomned(task.consumedTime), task.remainingTime)} d'avancement`
+                : 'Impossible de calculer l\'avancement'}
+              className={classes.chip}
+              variant="outlined"
+            />
+
             <IconButton
               className={classnames(classes.expand, {
                 [classes.expandOpen]: this.state.expanded,

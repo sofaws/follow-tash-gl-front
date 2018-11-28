@@ -6,3 +6,10 @@ export const STATUS = [
   'Doing',
   'closed',
 ];
+
+export const TYPES = [
+  'Front',
+  'Back',
+  'BugFix',
+  'Autres',
+];

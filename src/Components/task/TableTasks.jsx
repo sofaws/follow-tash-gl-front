@@ -8,6 +8,7 @@ import { secondsToHms } from '../../Utils/TimeHelper';
 import { getStatus } from '../../Utils/TaskHelper';
 import { getRouteWithParams } from '../../Utils/RouterHelper';
 import { TASK_PAGE_URL } from '../../Constants/routeName';
+import { getPourcentProgress, getSkid, getSumConsomned } from '../../Utils/ManagementHelper';
 
 const styles = {
   root: {
@@ -66,26 +67,28 @@ function TableTasks(props: Props) {
         </TableHead>
         <TableBody>
           {data.map(n => (
-            <TableRow className={classes.tableRow} key={n.id} onClick={() => history.push(getRouteWithParams(TASK_PAGE_URL, { id: n.iid }))} hover>
+            <TableRow className={classes.tableRow} key={n.id} onClick={() => history.push(getRouteWithParams(TASK_PAGE_URL, { id: n.id }))} hover>
               <TableCell component="th" scope="row">
                 {n.iid}
               </TableCell>
               <TableCell>{n.title}</TableCell>
               <TableCell>{getStatus(n.labels, n.state)}</TableCell>
               <TableCell>
-                {n.assignee ? (
+                {n.member ? (
                   <div className={classes.row}>
-                    <Avatar alt={n.assignee.name} src={n.assignee.avatar_url} className={classes.avatar} />
-                    <span>{n.assignee.name}</span>
+                    <Avatar alt={n.member.name} src={n.member.avatarUrl} className={classes.avatar} />
+                    <span>{n.member.name}</span>
                   </div>
                 ) : 'Aucun assigné'}
               </TableCell>
-              <TableCell>{n.time_stats.human_time_estimate || 'Non éstimée'}</TableCell>
-              <TableCell>{n.time_stats.human_time_spent || '00h00'}</TableCell>
-              <TableCell>{n.raf}</TableCell>
-              <TableCell>{n.avancement}</TableCell>
-              <TableCell className={n.derapage > 0 ? classes.derapageBad : classes.derapageGood}>
-                {`${n.derapage < 0 ? '-' : ''}${secondsToHms(n.derapage)}`}
+              <TableCell>{n.estimatedTime ? secondsToHms(n.estimatedTime) : 'Non éstimée'}</TableCell>
+              <TableCell>{n.consumedTime ? secondsToHms(getSumConsomned(n.consumedTime)) : '00h00'}</TableCell>
+              <TableCell>{n.remainingTime ? secondsToHms(n.remainingTime) : 'Non renseigné'}</TableCell>
+              <TableCell>
+                {getPourcentProgress(getSumConsomned(n.consumedTime), n.remainingTime)}
+              </TableCell>
+              <TableCell className={getSkid(n.estimatedTime, getSumConsomned(n.consumedTime), n.remainingTime) > 0 ? classes.derapageBad : classes.derapageGood}>
+                {`${secondsToHms(getSkid(n.estimatedTime, getSumConsomned(n.consumedTime), n.remainingTime))}`}
               </TableCell>
             </TableRow>
           ))}

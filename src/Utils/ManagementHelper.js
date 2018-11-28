@@ -17,7 +17,7 @@ export function getSkid(estimated: number, imputed: number, raf: number) {
  * @returns {number}
  */
 export function getProgress(imputed: number, raf: number) {
-  return (imputed / (imputed / raf));
+  return (imputed / (imputed + raf));
 }
 
 /**
@@ -27,5 +27,21 @@ export function getProgress(imputed: number, raf: number) {
  * @returns {string}
  */
 export function getPourcentProgress(imputed: number, raf: number) {
-  return `${getProgress(imputed, raf) * 100}%`;
+  if (!imputed || !raf) {
+    return 'Calcul impossible';
+  }
+
+  return `${Math.round(getProgress(imputed, raf) * 100)}%`;
+}
+
+/**
+ * Return the sum of array imputations
+ * @param consomed
+ * @returns {number}
+ */
+export function getSumConsomned(consomed) {
+  if (!consomed) return null;
+  return Object.values(consomed).reduce(
+    (accumulator, currentValue) => accumulator + currentValue, 0,
+  );
 }

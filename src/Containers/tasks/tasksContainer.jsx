@@ -20,14 +20,14 @@ type Props = {
 class TasksContainer extends React.Component<Props> {
     state = {
       status: [],
-        tasks: [],
+      tasks: [],
       filterText: '',
     };
 
     async componentDidMount() {
       const tasks = await api.get('tasks').json();
       this.setState({
-          tasks,
+        tasks,
       });
     }
 
