@@ -14,7 +14,9 @@ import HomeContainer from '../Containers/home/homeContainer';
 import TasksContainer from '../Containers/tasks/tasksContainer';
 import TaskContainer from '../Containers/tasks/taskContainer';
 import '../Stylesheets/app.css';
-import {HOME_PAGE_URL, TASK_PAGE_URL, TASKS_PAGE_URL, USERS_PAGE_URL} from '../Constants/routeName';
+import {
+  HOME_PAGE_URL, TASK_PAGE_URL, TASKS_PAGE_URL, USERS_PAGE_URL,
+} from '../Constants/routeName';
 
 const drawerWidth = 240;
 

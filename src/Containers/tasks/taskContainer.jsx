@@ -15,9 +15,9 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Chip from '@material-ui/core/es/Chip/Chip';
 import ImputationCard from '../../Components/task/ImputationCard';
 import api from '../../Utils/Api';
-import {getStatus, getTypeTask} from '../../Utils/TaskHelper';
+import { getStatus, getTypeTask } from '../../Utils/TaskHelper';
 import { secondsToHms } from '../../Utils/TimeHelper';
-import {getPourcentProgress, getSumConsomned} from '../../Utils/ManagementHelper';
+import { getPourcentProgress, getSumConsomned } from '../../Utils/ManagementHelper';
 
 const styles = theme => ({
   card: {
@@ -104,11 +104,11 @@ class TaskContainer extends React.Component<Props> {
               className={classes.chip}
               color="secondary"
             />
-              <Chip
-                  label={getTypeTask(task.labels) || "Aucun type"}
-                  className={classes.chip}
-                  color="primary"
-              />
+            <Chip
+              label={getTypeTask(task.labels) || 'Aucun type'}
+              className={classes.chip}
+              color="primary"
+            />
             <Chip
               label={task.estimatedTime
                 ? `${secondsToHms(task.estimatedTime)} estimées`

@@ -4,7 +4,7 @@ import Card from '@material-ui/core/es/Card/Card';
 import CardContent from '@material-ui/core/es/CardContent/CardContent';
 import Avatar from '@material-ui/core/es/Avatar/Avatar';
 import Typography from '@material-ui/core/es/Typography/Typography';
-import red from "@material-ui/core/colors/red";
+import red from '@material-ui/core/colors/red';
 
 const styles = {
   contentImputation: {
@@ -13,15 +13,15 @@ const styles = {
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-    avatar: {
-        backgroundColor: red[500],
-    },
-    cardImputation: {
-        margin: 10,
-        marginLeft: 30,
-        marginRight: 30,
-        maxWidth: 350,
-    },
+  avatar: {
+    backgroundColor: red[500],
+  },
+  cardImputation: {
+    margin: 10,
+    marginLeft: 30,
+    marginRight: 30,
+    maxWidth: 350,
+  },
 };
 
 type Props = {
