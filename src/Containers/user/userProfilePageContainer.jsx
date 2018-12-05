@@ -1,10 +1,10 @@
 import React from 'react';
-import { activeTaskComponent as ActiveTasks} from "../../Components/task/activeTaskComponent";
+import ActiveTaskComponent from "../../Components/task/activeTaskComponent";
 import Grid from '@material-ui/core/Grid';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import api from "../../Utils/Api";
-import { historyTableComponent as HistoryTableComponent } from "../../Components/user/historyTableComponent"
+import TableTasks from "../../Components/task/TableTasks"
 
 class UserProfilePageContainer extends React.Component {
 
@@ -50,7 +50,7 @@ class UserProfilePageContainer extends React.Component {
                 >
                     {this.state.activeTasks.map((value,index) => (
                         <Grid key={index} item className="padding4">
-                            <ActiveTasks task={value}/>
+                            <ActiveTaskComponent task={value}/>
                         </Grid>
                     ))}
                 </Grid>
@@ -59,7 +59,7 @@ class UserProfilePageContainer extends React.Component {
                     <Typography variant="h4" gutterBottom component="h2">
                        Historique des tâches
                     </Typography>
-                    <HistoryTableComponent tasks={this.state.pastTasks}> </HistoryTableComponent>
+                    <TableTasks data={this.state.pastTasks}/>
                 </section>
             </div>
         )

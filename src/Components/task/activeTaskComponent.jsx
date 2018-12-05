@@ -9,8 +9,9 @@ import Grid from '@material-ui/core/Grid';
 import CardActions from '@material-ui/core/CardActions';
 import './activeTaskStyle.css';
 import { secondsToHms } from "../../Utils/TimeHelper";
-import { TASK_DETAIL_PAGE_URL } from "../../Constants/routeName";
-import { Link } from 'react-router-dom';
+import { TASK_PAGE_URL } from "../../Constants/routeName";
+import {withRouter} from 'react-router-dom';
+import {getRouteWithParams} from "../../Utils/RouterHelper";
 
 
 interface TaskInterface {
@@ -25,8 +26,9 @@ interface TaskInterface {
 }
 type Props = {
     task: TaskInterface,
+    history: () => void,
 };
-export const activeTaskComponent = ({task}: Props) => (
+const ActiveTaskComponent = ({task, history}: Props) => (
   <Card className="card">
     <CardContent>
       <Grid container alignContent="center" alignItems="center">
@@ -37,11 +39,10 @@ export const activeTaskComponent = ({task}: Props) => (
 
         </Grid>
         <Grid item sm={1}>
-            <Link to={`/${TASK_DETAIL_PAGE_URL}/${task.iid}`} className="navBar">
-          <Button variant="fab" mini color="secondary" aria-label="More info">
+          <Button variant="fab" mini color="secondary" aria-label="More info"
+                  onClick={() => history.push(getRouteWithParams(TASK_PAGE_URL, { id: task.id }))}>
             <Icon>show_chart</Icon>
           </Button>
-            </Link>
         </Grid>
       </Grid>
     </CardContent>
@@ -69,3 +70,5 @@ export const activeTaskComponent = ({task}: Props) => (
       </CardActions>
   </Card>
 );
+
+export default withRouter(ActiveTaskComponent);

@@ -7,7 +7,7 @@ import PeopleIcon from '@material-ui/icons/People';
 import LayersIcon from '@material-ui/icons/Layers';
 import Divider from '@material-ui/core/es/Divider/Divider';
 import { Link } from 'react-router-dom';
-import {HOME_PAGE_URL, TASKS_PAGE_URL, USERS_PAGE_URL} from '../../Constants/routeName';
+import { HOME_PAGE_URL, TASKS_PAGE_URL, USERS_PAGE_URL } from '../../Constants/routeName';
 import './navBarList.css';
 
 export default (

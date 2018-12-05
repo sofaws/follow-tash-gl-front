@@ -1,9 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import {
   FormControl, InputLabel, Select, Input, Chip, MenuItem,
 } from '@material-ui/core';
+import { STATUS } from '../../config';
 
 const styles = {
   formControl: {
@@ -23,12 +23,6 @@ const styles = {
   },
 };
 
-
-const STATUS = [
-  'En cours',
-  'Fini',
-  'Bloqué',
-];
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
