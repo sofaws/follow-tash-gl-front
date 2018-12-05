@@ -1,6 +1,10 @@
 .root {
   display: flex;
 }
+.rootPaper {
+  width: 100%;
+  overflow-X: auto;
+}
 .hide{
   display: none!important;
 }
@@ -31,4 +35,26 @@
 }
 .padding4{
   padding: 4px;
+}
+.margin10Top {
+  margin-top: 10px;
+}
+.margin30TopBottom {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.shadow {
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2),
+  0 4px 5px 0 rgba(0, 0, 0, 0.14),
+  0 1px 10px 0 rgba(0, 0, 0, 0.12);
+}
+.derapageBad {
+  color: red!important;
+}
+.derapageGood {
+  color: green!important;
+}
+.table {
+  min-width: 700px;
 }

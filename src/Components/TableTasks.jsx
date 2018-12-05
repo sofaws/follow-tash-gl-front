@@ -1,37 +1,19 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
 import {
   Table, TableBody, TableCell, TableHead, TableRow, Paper,
 } from '@material-ui/core';
 import { secondsToHms } from '../Utils/TimeHelper';
 
-const styles = {
-  root: {
-    width: '100%',
-    overflowX: 'auto',
-  },
-  table: {
-    minWidth: 700,
-  },
-  derapageBad: {
-    color: 'red',
-  },
-  derapageGood: {
-    color: 'green',
-  },
-};
-
 type Props = {
-    classes: {},
     data: [],
 };
 
 function TableTasks(props: Props) {
-  const { classes, data } = props;
+  const { data } = props;
 
   return (
-    <Paper className={classes.root}>
-      <Table className={classes.table}>
+    <Paper className="rootPaper">
+      <Table className="table">
         <TableHead>
           <TableRow>
             <TableCell>ID</TableCell>
@@ -58,7 +40,7 @@ function TableTasks(props: Props) {
               <TableCell>{n.inputed}</TableCell>
               <TableCell>{n.raf}</TableCell>
               <TableCell>{n.avancement}</TableCell>
-              <TableCell className={n.derapage > 0 ? classes.derapageBad : classes.derapageGood}>
+              <TableCell className={n.derapage > 0 ? "derapageBad" : "derapageGood"}>
                 {`${n.derapage < 0 ? '-' : ''}${secondsToHms(n.derapage)}`}
               </TableCell>
             </TableRow>
@@ -69,4 +51,4 @@ function TableTasks(props: Props) {
   );
 }
 
-export default withStyles(styles)(TableTasks);
+export default TableTasks;

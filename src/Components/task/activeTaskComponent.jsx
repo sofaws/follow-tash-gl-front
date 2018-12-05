@@ -18,7 +18,7 @@ interface TaskInterface {
   iid: number;
   title: string;
   description: string;
-  labels: {};
+  labels: [];
   webUrl: string;
   estimatedTime: number;
   spentTime: number;
@@ -37,7 +37,7 @@ export const activeTaskComponent = ({task}: Props) => (
 
         </Grid>
         <Grid item sm={1}>
-            <Link to={`/${TASK_DETAIL_PAGE_URL}/:${task.iid}`} className="navBar">
+            <Link to={`/${TASK_DETAIL_PAGE_URL}/${task.iid}`} className="navBar">
           <Button variant="fab" mini color="secondary" aria-label="More info">
             <Icon>show_chart</Icon>
           </Button>
@@ -46,9 +46,6 @@ export const activeTaskComponent = ({task}: Props) => (
       </Grid>
     </CardContent>
     <CardContent>
-        <Typography variant="body1" component="p">
-            {task.description}
-        </Typography>
       <div className="flexEvenly">
         <Chip
           label={`Estimé ${secondsToHms(task.estimatedTime)}`}
@@ -62,10 +59,13 @@ export const activeTaskComponent = ({task}: Props) => (
         />
       </div>
     </CardContent>
-      <CardActions>
+      <CardActions className="shadow margin10Top">
           <Button  size="small" variant="outlined" href={task.webUrl}>
               Issue
           </Button>
+          {task.labels.map((value,index) => (
+              <Chip key={index} label={value}/>
+          ))}
       </CardActions>
   </Card>
 );
