@@ -27,7 +27,7 @@ export function getProgress(imputed: number, raf: number) {
  * @returns {string}
  */
 export function getPourcentProgress(imputed: number, raf: number) {
-  if (!imputed || !raf) {
+  if (!imputed || (!raf && raf !== 0)) {
     return 'Calcul impossible';
   }
 
@@ -42,6 +42,6 @@ export function getPourcentProgress(imputed: number, raf: number) {
 export function getSumConsomned(consomed) {
   if (!consomed) return null;
   return Object.values(consomed).reduce(
-    (accumulator, currentValue) => accumulator + currentValue, 0,
+    (accumulator, currentValue) => accumulator + currentValue.time, 0,
   );
 }

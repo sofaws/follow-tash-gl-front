@@ -73,16 +73,16 @@ function TableTasks(props: Props) {
               <TableCell>{n.title}</TableCell>
               <TableCell>{getStatus(n.labels, n.state)}</TableCell>
               <TableCell>
-                {n.member ? (
+                {n.assignee ? (
                   <div className={classes.row}>
-                    <Avatar alt={n.member.name} src={n.member.avatarUrl} className={classes.avatar} />
-                    <span>{n.member.name}</span>
+                    <Avatar alt={n.assignee.name} src={n.assignee.avatarUrl} className={classes.avatar} />
+                    <span>{n.assignee.name}</span>
                   </div>
                 ) : 'Aucun assigné'}
               </TableCell>
               <TableCell>{n.estimatedTime ? secondsToHms(n.estimatedTime) : 'Non éstimée'}</TableCell>
               <TableCell>{n.consumedTime ? secondsToHms(getSumConsomned(n.consumedTime)) : '00h00'}</TableCell>
-              <TableCell>{n.remainingTime ? secondsToHms(n.remainingTime) : 'Non renseigné'}</TableCell>
+              <TableCell>{n.remainingTime || n.remainingTime === 0 ? secondsToHms(n.remainingTime) : 'Non renseigné'}</TableCell>
               <TableCell>
                 {getPourcentProgress(getSumConsomned(n.consumedTime), n.remainingTime)}
               </TableCell>
