@@ -18,10 +18,11 @@ import api from '../../Utils/Api';
 import {getStatus, getTypeTask} from '../../Utils/TaskHelper';
 import {secondsToHms} from '../../Utils/TimeHelper';
 import {getPourcentProgress, getSumConsomned} from '../../Utils/ManagementHelper';
+import {getSkid} from "../../Utils/ManagementHelper";
 
 const styles = theme => ({
     card: {
-        maxWidth: 1000,
+        maxWidth: 1500,
     },
     media: {
         height: 0,
@@ -45,6 +46,13 @@ const styles = theme => ({
     },
     chip: {
         margin: 5,
+    },
+
+    chipDerapageBad: {
+        margin: 5,
+        color: 'white',
+        backgroundColor: '#E57373',
+
     },
 });
 
@@ -120,18 +128,23 @@ class TaskContainer extends React.Component<Props> {
                         variant="outlined"
                     />
                     <Chip
-                        label={task.remainingTime
+                        label={task.remainingTime || task.remainingTime === 0
                             ? `${secondsToHms(task.remainingTime)} RAF`
                             : 'RAF non renseigné'}
                         className={classes.chip}
                         variant="outlined"
                     />
                     <Chip
-                        label={task.remainingTime
+                        label={task.remainingTime || task.remainingTime === 0
                             ? `${getPourcentProgress(getSumConsomned(task.consumedTime), task.remainingTime)} d'avancement`
                             : 'Impossible de calculer l\'avancement'}
                         className={classes.chip}
                         variant="outlined"
+                    />
+
+                    <Chip
+                        label={`${secondsToHms(getSkid(task.estimatedTime, getSumConsomned(task.consumedTime), task.remainingTime))} de dérapage`}
+                        className={getSkid(task.estimatedTime, getSumConsomned(task.consumedTime), task.remainingTime) > 0 && classes.chipDerapageBad}
                     />
 
                     <IconButton
@@ -150,12 +163,12 @@ class TaskContainer extends React.Component<Props> {
                         <Typography variant="h6">
                             Liste des imputations
                         </Typography>
-                    {task.consumedTime ? _.map(task.consumedTime, (task) =>
-                        <ImputationCard key={task.user.id} {...task} />
-                    ) : <Typography component="p">
-                        Aucunes imputations pour cette tâche
-                    </Typography>
-                    }
+                        {task.consumedTime ? _.map(task.consumedTime, (task) =>
+                            <ImputationCard key={task.user.id} {...task} />
+                        ) : <Typography component="p">
+                            Aucunes imputations pour cette tâche
+                        </Typography>
+                        }
                     </CardContent>
 
                 </Collapse>
