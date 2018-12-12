@@ -32,6 +32,7 @@ import CardFooter from "components/Card/CardFooter.jsx";
 import dashboardStyle from "assets/jss/material-dashboard-react/views/dashboardStyle.jsx";
 import api from "../../utils/Api.js";
 import { getStatus } from "utils/TaskHelper";
+import { Link, withRouter } from "react-router-dom";
 
 class Dashboard extends React.Component {
   state = {
@@ -57,7 +58,7 @@ class Dashboard extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, history } = this.props;
     const { tasks, members } = this.state;
     return (
       <div>
@@ -75,9 +76,7 @@ class Dashboard extends React.Component {
               </CardHeader>
               <CardFooter stats>
                 <div className={classes.stats}>
-                  <a href="#pablo" onClick={e => e.preventDefault()}>
-                    Liste des tâches
-                  </a>
+                  <Link to={"/tasks"}>Liste des tâches</Link>
                 </div>
               </CardFooter>
             </Card>
@@ -113,8 +112,7 @@ class Dashboard extends React.Component {
                 </p>
                 <h3 className={classes.cardTitle}>
                   {
-                    members
-                      .filter(member => !this.memberIsAssigned(member))
+                    members.filter(member => !this.memberIsAssigned(member))
                       .length
                   }
                 </h3>
@@ -158,6 +156,8 @@ class Dashboard extends React.Component {
               </CardHeader>
               <CardBody>
                 <Table
+                  type={"user"}
+                  onPressItem={history.push}
                   tableHeaderColor="warning"
                   tableHead={["ID", "Nom", "Pseudo"]}
                   tableData={members
@@ -177,4 +177,4 @@ Dashboard.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(dashboardStyle)(Dashboard);
+export default withRouter(withStyles(dashboardStyle)(Dashboard));

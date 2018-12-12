@@ -85,16 +85,20 @@ class UserProfile extends React.Component {
                   alignItems="center"
                   className={classes.containCards}
                 >
-                  {activeTasks.map((value, index) => (
-                    <Grid key={index} item className="padding4">
-                      <ActiveTaskComponent task={value} />
-                    </Grid>
-                  ))}
+                  {activeTasks.length ? (
+                    activeTasks.map((value, index) => (
+                      <Grid key={index} item className="padding4">
+                        <ActiveTaskComponent task={value} />
+                      </Grid>
+                    ))
+                  ) : (
+                    <p>Aucune tâches assignées</p>
+                  )}
                 </Grid>
                 <Typography variant="h6" gutterBottom component="h3">
                   Liste des tâches
                 </Typography>
-                <TableTasks tasks={tasks} />
+                  {tasks.length ? <TableTasks tasks={tasks} /> : <p>Aucune tâche liée au déveleppeur</p>}
               </CardBody>
             </Card>
           </GridItem>

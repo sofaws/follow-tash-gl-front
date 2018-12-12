@@ -25,7 +25,7 @@ const dashboardRoutes = [
   {
     path: "/users",
     sidebarName: "Les membres",
-    navbarName: "Profile",
+    navbarName: "Liste des membres",
     icon: Person,
     component: UsersList
   },
