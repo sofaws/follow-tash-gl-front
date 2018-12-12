@@ -98,16 +98,18 @@ class UserProfile extends React.Component {
                 <Typography variant="h6" gutterBottom component="h3">
                   Liste des tâches
                 </Typography>
-                  {tasks.length ? <TableTasks tasks={tasks} /> : <p>Aucune tâche liée au déveleppeur</p>}
+                {tasks.length ? (
+                  <TableTasks tasks={tasks} />
+                ) : (
+                  <p>Aucune tâche liée au déveleppeur</p>
+                )}
               </CardBody>
             </Card>
           </GridItem>
           <GridItem xs={12} sm={12} md={4}>
             <Card profile>
               <CardAvatar profile>
-                <a href="#pablo" onClick={e => e.preventDefault()}>
-                  <img src={user.avatarUrl} alt="..." />
-                </a>
+                <img src={user.avatarUrl} alt="..." />
               </CardAvatar>
               <CardBody profile>
                 <h6 className={classes.cardCategory}>@{user.username}</h6>
@@ -115,9 +117,11 @@ class UserProfile extends React.Component {
                 <p className={classes.description}>
                   Un grand développeur ...comme tous les autres.
                 </p>
-                <Button color="primary" round>
-                  Profil Gitlab
-                </Button>
+                <a href={`https://gitlab.com/${user.username}`}>
+                  <Button color="primary" round>
+                    Profil Gitlab
+                  </Button>
+                </a>
               </CardBody>
             </Card>
           </GridItem>
