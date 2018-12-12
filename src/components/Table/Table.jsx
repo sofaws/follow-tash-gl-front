@@ -80,7 +80,8 @@ CustomTable.propTypes = {
   ]),
   tableHead: PropTypes.arrayOf(PropTypes.string),
   tableData: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.any)),
-  onPressItem: PropTypes.function
+  onPressItem: PropTypes.function,
+  type: PropTypes.string
 };
 
 export default withStyles(tableStyle)(CustomTable);
