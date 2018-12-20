@@ -1,18 +1,20 @@
 import React from "react";
-import api from "../../utils/Api.js";
-import withStyles from "@material-ui/core/es/styles/withStyles";
 import { withRouter } from "react-router-dom";
-import FilterText from "components/Filters/FilterText";
+import withStyles from "@material-ui/core/es/styles/withStyles";
 import { default as CardMaterial } from "@material-ui/core/es/Card/Card";
 import Typography from "@material-ui/core/es/Typography/Typography";
 import CardContent from "@material-ui/core/es/CardContent/CardContent";
 import Grid from "@material-ui/core/es/Grid/Grid";
 import Avatar from "@material-ui/core/es/Avatar/Avatar";
+
 import CardHeader from "components/Card/CardHeader";
 import CardBody from "components/Card/CardBody";
 import Card from "components/Card/Card";
 import GridContainer from "components/Grid/GridContainer";
 import GridItem from "components/Grid/GridItem";
+import FilterText from "components/Filters/FilterText";
+
+import api from "../../utils/Api.js";
 
 const styles = () => ({
   cardCategoryWhite: {

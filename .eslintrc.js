@@ -12,10 +12,11 @@ module.exports = {
       jsx: true
     }
   },
-  plugins: ["react"],
+  plugins: ["react", "flowtype"],
   extends: [
     "eslint:recommended",
     "plugin:react/recommended",
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
+    "plugin:flowtype/recommended"
   ]
 };

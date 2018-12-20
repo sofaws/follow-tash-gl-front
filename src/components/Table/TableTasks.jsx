@@ -1,9 +1,9 @@
 import React from "react";
-// @material-ui/core components
+
 import withStyles from "@material-ui/core/styles/withStyles";
 import { withRouter } from "react-router-dom";
+import Avatar from "@material-ui/core/es/Avatar/Avatar";
 
-// core components
 import { getStatus } from "utils/TaskHelper";
 import { secondsToHms } from "utils/TimeHelper";
 import {
@@ -11,7 +11,6 @@ import {
   getSkid,
   getPourcentProgress
 } from "utils/ManagementHelper";
-import Avatar from "@material-ui/core/es/Avatar/Avatar";
 
 import Table from "./Table.jsx";
 

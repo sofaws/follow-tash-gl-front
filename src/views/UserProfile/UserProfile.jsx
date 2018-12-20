@@ -1,9 +1,11 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
 
-// @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
-// core components
+import Grid from "@material-ui/core/es/Grid/Grid";
+import Typography from "@material-ui/core/es/Typography/Typography";
+
+import TableTasks from "components/Table/TableTasks";
+import ActiveTaskComponent from "components/ActiveTaskComponent/ActiveTaskComponent";
 import GridItem from "components/Grid/GridItem.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
 import Button from "components/CustomButtons/Button.jsx";
@@ -13,10 +15,6 @@ import CardAvatar from "components/Card/CardAvatar.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 
 import api from "../../utils/Api.js";
-import Grid from "@material-ui/core/es/Grid/Grid";
-import ActiveTaskComponent from "components/ActiveTaskComponent/ActiveTaskComponent";
-import Typography from "@material-ui/core/es/Typography/Typography";
-import TableTasks from "components/Table/TableTasks";
 
 const styles = {
   cardCategoryWhite: {

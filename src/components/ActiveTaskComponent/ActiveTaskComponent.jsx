@@ -1,4 +1,6 @@
 import * as React from 'react';
+import {withRouter} from 'react-router-dom';
+
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
@@ -7,11 +9,11 @@ import Icon from '@material-ui/core/Icon';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import CardActions from '@material-ui/core/CardActions';
-import './activeTaskStyle.css';
+
 import { secondsToHms } from "utils/TimeHelper";
-import {withRouter} from 'react-router-dom';
 import {getRouteWithParams} from "utils/RouterHelper";
 import {getSumConsomned} from "utils/ManagementHelper";
+import './activeTaskStyle.css';
 
 
 interface TaskInterface {
