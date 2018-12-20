@@ -24,6 +24,8 @@ import {
   getSkid,
   getPourcentProgress
 } from "utils/ManagementHelper";
+import connect from "react-redux/es/connect/connect";
+import { getTasksById } from "reducers/index.reducer";
 
 const styles = theme => ({
   card: {
@@ -61,15 +63,8 @@ const styles = theme => ({
 });
 
 class TaskDetails extends React.Component<> {
-  state = { expanded: false, task: {}, isLoad: false };
+  state = { expanded: false };
 
-  async componentDidMount() {
-    const task = await api.get(`tasks/${this.props.match.params.id}`).json();
-    this.setState({
-      task,
-      isLoad: true
-    });
-  }
 
   handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));
@@ -77,9 +72,9 @@ class TaskDetails extends React.Component<> {
 
   render() {
     const { classes } = this.props;
-    const { task, isLoad } = this.state;
+    const { task } = this.props;
 
-    if (!isLoad) return null;
+    if (!task) return null;
     return (
       <Card className={classes.card}>
         <CardHeader
@@ -190,4 +185,13 @@ class TaskDetails extends React.Component<> {
   }
 }
 
-export default withStyles(styles)(TaskDetails);
+function mapStateToProps(state, props) {
+  return {
+    task: getTasksById(state, { id: props.match.params.id })
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  null
+)(withStyles(styles)(TaskDetails));

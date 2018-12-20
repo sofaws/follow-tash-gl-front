@@ -57,7 +57,6 @@ const styles = {
 function TableTasks({ classes, tasks, history }) {
   return (
     <Table
-      type={"task"}
       tableHeaderColor="primary"
       tableHead={[
         "Id",
@@ -70,7 +69,8 @@ function TableTasks({ classes, tasks, history }) {
         "Avancement",
         "Dérapage"
       ]}
-      onPressItem={history.push}
+      onPressItem={task => history.push(`/task/${task.id}`)}
+      data={tasks}
       tableData={tasks.map(task => {
         return [
           task.id,

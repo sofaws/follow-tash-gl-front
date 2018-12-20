@@ -1,4 +1,5 @@
 import React from "react";
+import {connect} from "react-redux";
 
 import withStyles from "@material-ui/core/styles/withStyles";
 
@@ -13,6 +14,7 @@ import CardBody from "components/Card/CardBody.jsx";
 
 import api from "../../utils/Api.js";
 import { getStatus } from "utils/TaskHelper";
+import {getAllTasks} from "reducers/index.reducer";
 
 const styles = {
     cardCategoryWhite: {
@@ -52,22 +54,13 @@ type Props = {
 class TasksList extends React.Component<Props> {
     state = {
         status: [],
-        tasks: [],
         filterText: '',
     };
 
-    async componentDidMount() {
-        const tasks = await api.get('tasks').json();
-        this.setState({
-            tasks,
-        });
-    }
-
-
     filterTasks = () => {
-        const { tasks, status, filterText } = this.state;
-        const filterTextUppercase = filterText.toUpperCase();
-        return tasks.filter(
+        const { status, filterText } = this.state;
+        const { tasks } = this.props;
+        const filterTextUppercase = filterText.toUpperCase();return tasks.filter(
             element => (status.length === 0
                 || status.includes(getStatus(element.labels, element.state)))
                 && (filterText === '' || element.title.toUpperCase().includes(filterTextUppercase)
@@ -112,4 +105,14 @@ class TasksList extends React.Component<Props> {
     }
 }
 
-export default withStyles(styles)(TasksList);
+function mapStateToProps(state) {
+    return {
+        tasks: getAllTasks(state)
+    };
+}
+
+export default connect(
+    mapStateToProps,
+    null
+)(withStyles(styles)(TasksList));
+

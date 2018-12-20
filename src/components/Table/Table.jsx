@@ -17,7 +17,7 @@ function CustomTable({ ...props }) {
     tableData,
     tableHeaderColor,
     onPressItem,
-    type,
+    data
   } = props;
   return (
     <div className={classes.tableResponsive}>
@@ -43,7 +43,7 @@ function CustomTable({ ...props }) {
             return (
               <TableRow
                 key={key}
-                onClick={() => onPressItem(`/${type}/${prop[0]}`)}
+                onClick={() => onPressItem(data[key])}
                 hover
                 className={onPressItem && classes.rowHover}
               >
@@ -81,7 +81,8 @@ CustomTable.propTypes = {
   tableHead: PropTypes.arrayOf(PropTypes.string),
   tableData: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.any)),
   onPressItem: PropTypes.function,
-  type: PropTypes.string
+  type: PropTypes.string,
+  data: PropTypes.object
 };
 
 export default withStyles(tableStyle)(CustomTable);

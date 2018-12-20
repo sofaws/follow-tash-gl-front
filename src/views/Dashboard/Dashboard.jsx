@@ -46,6 +46,9 @@ class Dashboard extends React.Component {
   render() {
     const { classes, history } = this.props;
     const { tasks, members } = this.state;
+    const membersFilter = members.filter(
+      member => !this.memberIsAssigned(member)
+    );
     return (
       <div>
         <GridContainer>
@@ -143,12 +146,15 @@ class Dashboard extends React.Component {
               <CardBody>
                 <Table
                   type={"user"}
-                  onPressItem={history.push}
+                  data={membersFilter}
+                  onPressItem={user => history.push(`user/${user.id}`)}
                   tableHeaderColor="warning"
                   tableHead={["ID", "Nom", "Pseudo"]}
-                  tableData={members
-                    .filter(member => !this.memberIsAssigned(member))
-                    .map(member => [member.id, member.name, member.username])}
+                  tableData={membersFilter.map(member => [
+                    member.id,
+                    member.name,
+                    member.username
+                  ])}
                 />
               </CardBody>
             </Card>
