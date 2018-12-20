@@ -14,7 +14,9 @@ import CardHeader from "components/Card/CardHeader.jsx";
 import CardAvatar from "components/Card/CardAvatar.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 
-import api from "../../utils/Api.js";
+import connect from "react-redux/es/connect/connect";
+import { getUserById } from "reducers/index.reducer";
+import {getActiveTaskAtUser} from "reducers/index.reducer";
 
 const styles = {
   cardCategoryWhite: {
@@ -39,28 +41,12 @@ const styles = {
 };
 
 class UserProfile extends React.Component {
-  state = {
-    user: {},
-    tasks: [],
-    activeTasks: []
-  };
-
-  async componentDidMount() {
-    const res = await api.get(`members/${this.props.match.params.id}`).json();
-    this.setState({
-      user: res.member,
-      tasks: res.tasks,
-      activeTasks: res.tasks.filter(
-        element => element.assigneeId === Number(this.props.match.params.id)
-      )
-    });
-  }
 
   render() {
-    const { classes } = this.props;
-    const { user, tasks, activeTasks } = this.state;
+    if (!this.props.user) return null;
 
-    if (!user) return null;
+    const { classes, user: { member, tasks }, assignedTasks } = this.props;
+
     return (
       <div>
         <GridContainer>
@@ -83,8 +69,8 @@ class UserProfile extends React.Component {
                   alignItems="center"
                   className={classes.containCards}
                 >
-                  {activeTasks.length ? (
-                    activeTasks.map((value, index) => (
+                  {assignedTasks.length ? (
+                      assignedTasks.map((value, index) => (
                       <Grid key={index} item className="padding4">
                         <ActiveTaskComponent task={value} />
                       </Grid>
@@ -107,15 +93,15 @@ class UserProfile extends React.Component {
           <GridItem xs={12} sm={12} md={4}>
             <Card profile>
               <CardAvatar profile>
-                <img src={user.avatarUrl} alt="..." />
+                <img src={member.avatarUrl} alt="..." />
               </CardAvatar>
               <CardBody profile>
-                <h6 className={classes.cardCategory}>@{user.username}</h6>
-                <h4 className={classes.cardTitle}>{user.name}</h4>
+                <h6 className={classes.cardCategory}>@{member.username}</h6>
+                <h4 className={classes.cardTitle}>{member.name}</h4>
                 <p className={classes.description}>
                   Un grand développeur ...comme tous les autres.
                 </p>
-                <a href={`https://gitlab.com/${user.username}`}>
+                <a href={`https://gitlab.com/${member.username}`}>
                   <Button color="primary" round>
                     Profil Gitlab
                   </Button>
@@ -129,4 +115,14 @@ class UserProfile extends React.Component {
   }
 }
 
-export default withStyles(styles)(UserProfile);
+function mapStateToProps(state, props) {
+  return {
+    user: getUserById(state, { id: props.match.params.id }),
+    assignedTasks: getActiveTaskAtUser(state, { id: props.match.params.id })
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  null
+)(withStyles(styles)(UserProfile));

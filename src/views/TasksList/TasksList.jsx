@@ -12,7 +12,6 @@ import Card from "components/Card/Card.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 
-import api from "../../utils/Api.js";
 import { getStatus } from "utils/TaskHelper";
 import {getAllTasks} from "reducers/index.reducer";
 

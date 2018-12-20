@@ -43,7 +43,7 @@ const initialState = [];
 /////////////////
 export const getAllTasks = state => state;
 
-export const getTasksById = (state, props) => {
+export const getTaskById = (state, props) => {
   return state.find(task => task.id === Number(props.id));
 };
 

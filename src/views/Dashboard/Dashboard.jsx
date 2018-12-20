@@ -17,38 +17,22 @@ import CardBody from "components/Card/CardBody.jsx";
 import CardFooter from "components/Card/CardFooter.jsx";
 
 import dashboardStyle from "assets/jss/material-dashboard-react/views/dashboardStyle.jsx";
-import api from "../../utils/Api.js";
 import { getStatus } from "utils/TaskHelper";
+import connect from "react-redux/es/connect/connect";
+import { getAllTasks } from "reducers/index.reducer";
+import {getNotAssignedUsers} from "reducers/index.reducer";
 
 class Dashboard extends React.Component {
-  state = {
-    tasks: [],
-    members: []
-  };
-
-  async componentDidMount() {
-    const tasks = await api.get("tasks").json();
-    const members = await api.get("members").json();
-    this.setState({
-      tasks,
-      members
-    });
-  }
-
   memberIsAssigned = member => {
     let isAssignee = false;
-    this.state.tasks.forEach(task => {
+    this.props.tasks.forEach(task => {
       if (task.assigneeId === member.id) isAssignee = true;
     });
     return isAssignee;
   };
 
   render() {
-    const { classes, history } = this.props;
-    const { tasks, members } = this.state;
-    const membersFilter = members.filter(
-      member => !this.memberIsAssigned(member)
-    );
+    const { classes, history, tasks, usersNotAssigned } = this.props;
     return (
       <div>
         <GridContainer>
@@ -101,8 +85,7 @@ class Dashboard extends React.Component {
                 </p>
                 <h3 className={classes.cardTitle}>
                   {
-                    members.filter(member => !this.memberIsAssigned(member))
-                      .length
+                    usersNotAssigned.length
                   }
                 </h3>
               </CardHeader>
@@ -146,14 +129,14 @@ class Dashboard extends React.Component {
               <CardBody>
                 <Table
                   type={"user"}
-                  data={membersFilter}
+                  data={usersNotAssigned}
                   onPressItem={user => history.push(`user/${user.id}`)}
                   tableHeaderColor="warning"
                   tableHead={["ID", "Nom", "Pseudo"]}
-                  tableData={membersFilter.map(member => [
-                    member.id,
-                    member.name,
-                    member.username
+                  tableData={usersNotAssigned.map(user => [
+                    user.member.id,
+                    user.member.name,
+                    user.member.username
                   ])}
                 />
               </CardBody>
@@ -170,4 +153,14 @@ Dashboard.propTypes = {
   history: PropTypes.object.isRequired
 };
 
-export default withRouter(withStyles(dashboardStyle)(Dashboard));
+function mapStateToProps(state) {
+  return {
+    tasks: getAllTasks(state),
+    usersNotAssigned: getNotAssignedUsers(state)
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  null
+)(withRouter(withStyles(dashboardStyle)(Dashboard)));

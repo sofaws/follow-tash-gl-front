@@ -1,13 +1,39 @@
 import { combineReducers } from "redux";
 
 import tasksReducer, * as fromTasks from "./tasks.reducer";
-
+import usersReducer, * as fromUsers from "./users.reducer";
 import { createSelector } from "reselect";
 
 export default combineReducers({
-  tasks: tasksReducer
+  tasks: tasksReducer,
+  users: usersReducer
 });
 
 export const getAllTasks = state => fromTasks.getAllTasks(state.tasks);
-export const getTasksById = (state, props) =>
-  fromTasks.getTasksById(state.tasks, props);
+export const getTaskById = (state, props) =>
+  fromTasks.getTaskById(state.tasks, props);
+
+export const getAllUsers = state => fromUsers.getAllUsers(state.users);
+export const getUserById = (state, props) =>
+  fromUsers.getUserById(state.users, props);
+
+export const getNotAssignedUsers = createSelector(
+  [getAllUsers, getAllTasks],
+  (users, tasks) => {
+    return users.filter(user => {
+      let isAssignee = false;
+      tasks.forEach(task => {
+        if (task.assigneeId === user.member.id) isAssignee = true;
+      });
+      return !isAssignee;
+    });
+  }
+);
+
+export const getActiveTaskAtUser = createSelector(
+  [getUserById, getAllTasks],
+  (user, tasks) => {
+    if(!user) return [];
+    return tasks.filter(task => task.assigneeId === user.member.id);
+  }
+);

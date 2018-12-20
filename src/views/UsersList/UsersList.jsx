@@ -15,6 +15,8 @@ import GridItem from "components/Grid/GridItem";
 import FilterText from "components/Filters/FilterText";
 
 import api from "../../utils/Api.js";
+import connect from "react-redux/es/connect/connect";
+import { getAllUsers } from "reducers/index.reducer";
 
 const styles = () => ({
   cardCategoryWhite: {
@@ -62,16 +64,8 @@ const styles = () => ({
 
 class UsersContainer extends React.Component {
   state = {
-    users: [],
     filter: null
   };
-
-  async componentDidMount() {
-    const users = await api.get("members").json();
-    this.setState({
-      users
-    });
-  }
 
   handleChangeFilter = e => {
     this.setState({
@@ -80,7 +74,8 @@ class UsersContainer extends React.Component {
   };
 
   membersWithFilter = () => {
-    const { users, filter } = this.state;
+    const { filter } = this.state;
+    const { users } = this.props;
     if (!filter) return users;
     return users.filter(user => {
       return (
@@ -114,7 +109,8 @@ class UsersContainer extends React.Component {
                   handleChange={this.handleChangeFilter}
                 />
                 <Grid container spacing={24}>
-                  {usersFilter.map(user => {
+                  {usersFilter.map(item => {
+                    const user = item.member;
                     return (
                       <Grid key={user.id} item xs={3}>
                         <CardMaterial
@@ -154,4 +150,13 @@ class UsersContainer extends React.Component {
   }
 }
 
-export default withRouter(withStyles(styles)(UsersContainer));
+function mapStateToProps(state) {
+  return {
+    users: getAllUsers(state)
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  null
+)(withRouter(withStyles(styles)(UsersContainer)));

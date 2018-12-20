@@ -16,7 +16,6 @@ import Chip from "@material-ui/core/es/Chip/Chip";
 
 import ImputationCard from "components/ImputationCard/ImputationCard";
 
-import api from "../../utils/Api.js";
 import { getStatus, getTypeTask } from "utils/TaskHelper";
 import { secondsToHms } from "utils/TimeHelper";
 import {
@@ -25,7 +24,7 @@ import {
   getPourcentProgress
 } from "utils/ManagementHelper";
 import connect from "react-redux/es/connect/connect";
-import { getTasksById } from "reducers/index.reducer";
+import { getTaskById } from "reducers/index.reducer";
 
 const styles = theme => ({
   card: {
@@ -187,7 +186,7 @@ class TaskDetails extends React.Component<> {
 
 function mapStateToProps(state, props) {
   return {
-    task: getTasksById(state, { id: props.match.params.id })
+    task: getTaskById(state, { id: props.match.params.id })
   };
 }
 

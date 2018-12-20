@@ -1,4 +1,5 @@
 import tasks from "./tasks.saga";
+import users from "./users.saga";
 import { fork, all } from "redux-saga/effects";
 
 export function createSagaRoot(...sagas) {
@@ -7,4 +8,4 @@ export function createSagaRoot(...sagas) {
   };
 }
 
-export default createSagaRoot(tasks);
+export default createSagaRoot(tasks, users);

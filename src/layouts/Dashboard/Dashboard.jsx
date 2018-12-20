@@ -18,6 +18,7 @@ import image from "assets/img/sidebar.png";
 import logo from "assets/img/reactlogo.png";
 import {connect} from "react-redux";
 import {fetchTasks} from "reducers/tasks.reducer";
+import {fetchUsers} from "reducers/users.reducer";
 
 const switchRoutes = (
     <Switch>
@@ -54,6 +55,7 @@ class App extends React.Component {
         }
         window.addEventListener("resize", this.resizeFunction);
         this.props.fetchTasks();
+        this.props.fetchUsers();
     }
 
     componentDidUpdate(e) {
@@ -108,6 +110,7 @@ export default connect(
     null,
     {
         fetchTasks,
+        fetchUsers
     }
 )(withStyles(dashboardStyle)(App));
 
