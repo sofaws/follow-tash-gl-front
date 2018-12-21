@@ -130,7 +130,7 @@ class Dashboard extends React.Component {
                 <Table
                   type={"user"}
                   data={usersNotAssigned}
-                  onPressItem={user => history.push(`user/${user.id}`)}
+                  onPressItem={user => history.push(`user/${user.member.id}`)}
                   tableHeaderColor="warning"
                   tableHead={["ID", "Nom", "Pseudo"]}
                   tableData={usersNotAssigned.map(user => [
