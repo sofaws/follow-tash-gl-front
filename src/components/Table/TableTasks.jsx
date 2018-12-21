@@ -2,7 +2,7 @@ import React from "react";
 
 import withStyles from "@material-ui/core/styles/withStyles";
 import { withRouter } from "react-router-dom";
-import Avatar from "@material-ui/core/es/Avatar/Avatar";
+import Avatar from "@material-ui/core/Avatar/Avatar";
 
 import { getStatus } from "utils/TaskHelper";
 import { secondsToHms } from "utils/TimeHelper";

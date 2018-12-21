@@ -1,9 +1,9 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/es/Card/Card';
-import CardContent from '@material-ui/core/es/CardContent/CardContent';
-import Avatar from '@material-ui/core/es/Avatar/Avatar';
-import Typography from '@material-ui/core/es/Typography/Typography';
+import withStyles from "@material-ui/core/styles/withStyles";
+import Card from '@material-ui/core/Card/Card';
+import CardContent from '@material-ui/core/CardContent/CardContent';
+import Avatar from '@material-ui/core/Avatar/Avatar';
+import Typography from '@material-ui/core/Typography/Typography';
 import {secondsToHms} from "utils/TimeHelper";
 
 const styles = {

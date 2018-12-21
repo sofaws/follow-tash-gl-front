@@ -2,7 +2,7 @@ import React from "react";
 import classnames from "classnames";
 import _ from "lodash";
 
-import { withStyles } from "@material-ui/core/styles/index";
+import withStyles from "@material-ui/core/styles/withStyles";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
@@ -12,7 +12,7 @@ import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import Chip from "@material-ui/core/es/Chip/Chip";
+import Chip from "@material-ui/core/Chip/Chip";
 
 import ImputationCard from "components/ImputationCard/ImputationCard";
 
@@ -23,7 +23,7 @@ import {
   getSkid,
   getPourcentProgress
 } from "utils/ManagementHelper";
-import connect from "react-redux/es/connect/connect";
+import { connect } from "react-redux";
 import { getTaskById } from "reducers/index.reducer";
 
 const styles = theme => ({

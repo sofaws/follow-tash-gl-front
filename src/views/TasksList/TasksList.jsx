@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 
 import withStyles from "@material-ui/core/styles/withStyles";
 
-import Grid from "@material-ui/core/es/Grid/Grid";
+import Grid from "@material-ui/core/Grid/Grid";
 
 import FilterStatus from "components/Filters/FilterStatus";
 import FilterText from "components/Filters/FilterText";

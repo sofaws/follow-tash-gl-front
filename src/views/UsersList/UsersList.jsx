@@ -1,11 +1,11 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import withStyles from "@material-ui/core/es/styles/withStyles";
-import { default as CardMaterial } from "@material-ui/core/es/Card/Card";
-import Typography from "@material-ui/core/es/Typography/Typography";
-import CardContent from "@material-ui/core/es/CardContent/CardContent";
-import Grid from "@material-ui/core/es/Grid/Grid";
-import Avatar from "@material-ui/core/es/Avatar/Avatar";
+import withStyles from "@material-ui/core/styles/withStyles";
+import { default as CardMaterial } from "@material-ui/core/Card/Card";
+import Typography from "@material-ui/core/Typography/Typography";
+import CardContent from "@material-ui/core/CardContent/CardContent";
+import Grid from "@material-ui/core/Grid/Grid";
+import Avatar from "@material-ui/core/Avatar/Avatar";
 
 import CardHeader from "components/Card/CardHeader";
 import CardBody from "components/Card/CardBody";
@@ -15,7 +15,7 @@ import GridItem from "components/Grid/GridItem";
 import FilterText from "components/Filters/FilterText";
 
 import api from "../../utils/Api.js";
-import connect from "react-redux/es/connect/connect";
+import { connect } from "react-redux";
 import { getAllUsers } from "reducers/index.reducer";
 
 const styles = () => ({

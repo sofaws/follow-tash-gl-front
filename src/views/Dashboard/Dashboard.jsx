@@ -18,7 +18,7 @@ import CardFooter from "components/Card/CardFooter.jsx";
 
 import dashboardStyle from "assets/jss/material-dashboard-react/views/dashboardStyle.jsx";
 import { getStatus } from "utils/TaskHelper";
-import connect from "react-redux/es/connect/connect";
+import { connect } from "react-redux";
 import { getAllTasks } from "reducers/index.reducer";
 import {getNotAssignedUsers} from "reducers/index.reducer";
 

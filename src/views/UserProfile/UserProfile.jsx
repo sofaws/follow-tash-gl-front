@@ -1,8 +1,8 @@
 import React from "react";
 
 import withStyles from "@material-ui/core/styles/withStyles";
-import Grid from "@material-ui/core/es/Grid/Grid";
-import Typography from "@material-ui/core/es/Typography/Typography";
+import Grid from "@material-ui/core/Grid/Grid";
+import Typography from "@material-ui/core/Typography/Typography";
 
 import TableTasks from "components/Table/TableTasks";
 import ActiveTaskComponent from "components/ActiveTaskComponent/ActiveTaskComponent";
@@ -14,7 +14,7 @@ import CardHeader from "components/Card/CardHeader.jsx";
 import CardAvatar from "components/Card/CardAvatar.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 
-import connect from "react-redux/es/connect/connect";
+import { connect } from "react-redux";
 import { getUserById } from "reducers/index.reducer";
 import {getActiveTaskAtUser} from "reducers/index.reducer";
 

@@ -20,4 +20,4 @@ export const TYPES = ["Front", "Back", "BugFix", "Autres"];
  * Delays in minutes before each synchronization with the API
  * @type {number}
  */
-export const TIME_TO_RELOAD = 10;
+export const TIME_TO_RELOAD = 1;

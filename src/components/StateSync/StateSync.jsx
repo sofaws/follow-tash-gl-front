@@ -15,7 +15,7 @@ const StateSync = ({state, onCancel, onRestart, classes}: Props) => (
             { state === "START" ?
                 <div className={classes.iconActive}/> : <div className={classes.iconInactive}/>
                 }
-                <p className={classes.state}>{state === "START" ? "Syncronisation activé" : "Syncronisation désactivé"}</p>
+                <p className={classes.state}>{state === "START" ? "Syncronisation activée" : "Syncronisation désactivée"}</p>
             </div>
                 <Button
                     onClick={state === "START" ? onCancel : onRestart}
