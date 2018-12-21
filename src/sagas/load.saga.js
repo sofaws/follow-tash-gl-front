@@ -12,7 +12,11 @@ import { createSagaRoot } from "./index.saga";
 import { fetchUsers } from "reducers/users.reducer";
 import { fetchTasks } from "reducers/tasks.reducer";
 import { TIME_TO_RELOAD } from "../config";
-import { changeStateSync,  LOADALL_SYNC_START, LOADALL_STOP_SYNC } from "reducers/sync.reducer";
+import {
+  changeStateSync,
+  LOADALL_SYNC_START,
+  LOADALL_STOP_SYNC
+} from "reducers/sync.reducer";
 
 function* bgSyncLoad() {
   try {

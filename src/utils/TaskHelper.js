@@ -9,23 +9,16 @@ import { STATUS, TYPES } from "../config";
  * @returns {string}
  */
 export function getStatus(labels, state) {
-  let status = null;
-  labels.forEach(element => {
-    if (STATUS.includes(element)) status = element;
-  });
+  const status = labels.find(element => STATUS.includes(element));
   return status || state;
 }
 
 /**
  * Return the type of a task
  * @param labels
- * @param state
  * @returns {string}
  */
 export function getTypeTask(labels) {
-  let status = null;
-  labels.forEach(element => {
-    if (TYPES.includes(element)) status = element;
-  });
-  return status;
+  const type = labels.find(element => TYPES.includes(element));
+  return type;
 }
