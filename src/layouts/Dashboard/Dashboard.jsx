@@ -17,8 +17,8 @@ import dashboardStyle from "assets/jss/material-dashboard-react/layouts/dashboar
 import image from "assets/img/sidebar.png";
 import logo from "assets/img/reactlogo.png";
 import {connect} from "react-redux";
-import {fetchTasks} from "reducers/tasks.reducer";
-import {fetchUsers} from "reducers/users.reducer";
+import {startSync, stopSync} from "reducers/sync.reducer";
+import {getStateSync} from "reducers/index.reducer";
 
 const switchRoutes = (
     <Switch>
@@ -54,8 +54,7 @@ class App extends React.Component {
             const ps = new PerfectScrollbar(this.refs.mainPanel);
         }
         window.addEventListener("resize", this.resizeFunction);
-        this.props.fetchTasks();
-        this.props.fetchUsers();
+        this.props.startSync();
     }
 
     componentDidUpdate(e) {
@@ -72,10 +71,13 @@ class App extends React.Component {
     }
 
     render() {
-        const {classes, ...rest} = this.props;
+        const {classes, syncState, ...rest} = this.props;
         return (
             <div className={classes.wrapper}>
                 <Sidebar
+                    startSync={startSync}
+                    stopSync={stopSync}
+                    sync={syncState}
                     routes={dashboardRoutes.filter(element => !element.notNavbar)}
                     logoText={"Big Brother"}
                     logo={logo}
@@ -105,12 +107,17 @@ App.propTypes = {
     classes: PropTypes.object.isRequired
 };
 
+function mapStateToProps(state) {
+    return {
+        syncState: getStateSync(state),
+    };
+}
 
 export default connect(
-    null,
+    mapStateToProps,
     {
-        fetchTasks,
-        fetchUsers
+        startSync,
+        stopSync,
     }
 )(withStyles(dashboardStyle)(App));
 

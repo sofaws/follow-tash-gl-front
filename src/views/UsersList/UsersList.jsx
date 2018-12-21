@@ -79,8 +79,8 @@ class UsersContainer extends React.Component {
     if (!filter) return users;
     return users.filter(user => {
       return (
-        user.name.toUpperCase().includes(filter.toUpperCase()) ||
-        user.username.toUpperCase().includes(filter.toUpperCase())
+        user.member.name.toUpperCase().includes(filter.toUpperCase()) ||
+        user.member.username.toUpperCase().includes(filter.toUpperCase())
       );
     });
   };

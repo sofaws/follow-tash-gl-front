@@ -1,13 +1,19 @@
 import { combineReducers } from "redux";
-
 import tasksReducer, * as fromTasks from "./tasks.reducer";
 import usersReducer, * as fromUsers from "./users.reducer";
+import syncReducer, * as fromSync from "./sync.reducer";
 import { createSelector } from "reselect";
 
 export default combineReducers({
   tasks: tasksReducer,
-  users: usersReducer
+  users: usersReducer,
+  sync: syncReducer
 });
+
+
+//////////////////////////
+//  SHORTCUT SELECTORS  //
+//////////////////////////
 
 export const getAllTasks = state => fromTasks.getAllTasks(state.tasks);
 export const getTaskById = (state, props) =>
@@ -16,6 +22,13 @@ export const getTaskById = (state, props) =>
 export const getAllUsers = state => fromUsers.getAllUsers(state.users);
 export const getUserById = (state, props) =>
   fromUsers.getUserById(state.users, props);
+
+export const getStateSync = state => fromSync.getStateSync(state.sync);
+
+
+/////////////////////////
+//  COMMONS SELECTORS  //
+////////////////////////
 
 export const getNotAssignedUsers = createSelector(
   [getAllUsers, getAllTasks],
@@ -33,7 +46,7 @@ export const getNotAssignedUsers = createSelector(
 export const getActiveTaskAtUser = createSelector(
   [getUserById, getAllTasks],
   (user, tasks) => {
-    if(!user) return [];
+    if (!user) return [];
     return tasks.filter(task => task.assigneeId === user.member.id);
   }
 );

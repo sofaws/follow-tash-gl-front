@@ -1,4 +1,3 @@
-import { createSelector } from "reselect";
 
 ////////////////////
 //  Action types  //
