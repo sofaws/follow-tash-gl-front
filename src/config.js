@@ -2,7 +2,7 @@
  * Endpoint where glback API works
  * @type {string}
  */
-export const API_URL = "http://54.37.158.186:8080";
+export const API_URL = "https://gl-back.herokuapp.com";
 
 /**
  * List of different possible statuses for a task on your gitlab
