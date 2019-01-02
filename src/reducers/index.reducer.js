@@ -33,13 +33,7 @@ export const getStateSync = state => fromSync.getStateSync(state.sync);
 export const getNotAssignedUsers = createSelector(
   [getAllUsers, getAllTasks],
   (users, tasks) => {
-    return users.filter(user => {
-      let isAssignee = false;
-      tasks.forEach(task => {
-        if (task.assigneeId === user.member.id) isAssignee = true;
-      });
-      return !isAssignee;
-    });
+    return users.filter(user => !tasks.find(task => task.assigneeId === user.member.id));
   }
 );
 
