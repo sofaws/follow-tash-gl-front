@@ -15,7 +15,6 @@ function* getAllUsers(action) {
     yield put(fetchUsersFailure(e.message));
   }
 }
-
 function* watchGetUsers() {
   yield takeEvery(USERS_FETCH_REQUEST, getAllUsers);
 }

@@ -24,6 +24,7 @@ export const getUserById = (state, props) =>
   fromUsers.getUserById(state.users, props);
 
 export const getStateSync = state => fromSync.getStateSync(state.sync);
+export const getSyncLoading = state => fromSync.getSyncLoading(state.sync);
 
 
 /////////////////////////

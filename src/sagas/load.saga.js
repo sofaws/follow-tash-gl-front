@@ -14,6 +14,8 @@ import { fetchTasks } from "reducers/tasks.reducer";
 import { TIME_TO_RELOAD } from "../config";
 import {
   changeStateSync,
+  enableLoadingSync,
+  disableLoadingSync,
   LOADALL_SYNC_START,
   LOADALL_STOP_SYNC
 } from "reducers/sync.reducer";
@@ -21,7 +23,9 @@ import {
 function* bgSyncLoad() {
   try {
     while (true) {
+      yield put(enableLoadingSync());
       yield all([put(fetchUsers()), put(fetchTasks())]);
+      yield put(disableLoadingSync());
       yield call(delay, TIME_TO_RELOAD * 60 * 1000);
     }
   } finally {

@@ -6,6 +6,7 @@ import {Switch, Route, Redirect} from "react-router-dom";
 import PerfectScrollbar from "perfect-scrollbar";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
 import withStyles from "@material-ui/core/styles/withStyles";
+import LoadingOverlay from 'react-loading-overlay';
 
 import Header from "components/Header/Header.jsx";
 import Footer from "components/Footer/Footer.jsx";
@@ -18,7 +19,7 @@ import image from "assets/img/sidebar.png";
 import logo from "assets/img/reactlogo.png";
 import {connect} from "react-redux";
 import {startSync, stopSync} from "reducers/sync.reducer";
-import {getStateSync} from "reducers/index.reducer";
+import {getStateSync, getSyncLoading} from "reducers/index.reducer";
 
 const switchRoutes = (
     <Switch>
@@ -71,34 +72,40 @@ class App extends React.Component {
     }
 
     render() {
-        const {classes, syncState, ...rest} = this.props;
+        const {classes, syncState, syncLoading, ...rest} = this.props;
         return (
-            <div className={classes.wrapper}>
-                <Sidebar
-                    startSync={startSync}
-                    stopSync={stopSync}
-                    sync={syncState}
-                    routes={dashboardRoutes.filter(element => !element.notNavbar)}
-                    logoText={"Big Brother"}
-                    logo={logo}
-                    image={image}
-                    handleDrawerToggle={this.handleDrawerToggle}
-                    open={this.state.mobileOpen}
-                    color="blue"
-                    {...rest}
-                />
-                <div className={classes.mainPanel} ref="mainPanel">
-                    <Header
-                        routes={dashboardRoutes}
+            <LoadingOverlay
+                active={syncLoading}
+                spinner
+                text='Récupération des informations de BigBrother en cours..'
+            >
+                <div className={classes.wrapper}>
+                    <Sidebar
+                        startSync={startSync}
+                        stopSync={stopSync}
+                        sync={syncState}
+                        routes={dashboardRoutes.filter(element => !element.notNavbar)}
+                        logoText={"Big Brother"}
+                        logo={logo}
+                        image={image}
                         handleDrawerToggle={this.handleDrawerToggle}
+                        open={this.state.mobileOpen}
+                        color="blue"
                         {...rest}
                     />
-                    <div className={classes.content}>
-                        <div className={classes.container}>{switchRoutes}</div>
+                    <div className={classes.mainPanel} ref="mainPanel">
+                        <Header
+                            routes={dashboardRoutes}
+                            handleDrawerToggle={this.handleDrawerToggle}
+                            {...rest}
+                        />
+                        <div className={classes.content}>
+                            <div className={classes.container}>{switchRoutes}</div>
+                        </div>
+                        <Footer/>
                     </div>
-                    <Footer/>
                 </div>
-            </div>
+            </LoadingOverlay>
         );
     }
 }
@@ -110,6 +117,7 @@ App.propTypes = {
 function mapStateToProps(state) {
     return {
         syncState: getStateSync(state),
+        syncLoading: getSyncLoading(state),
     };
 }
 

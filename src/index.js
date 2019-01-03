@@ -13,9 +13,13 @@ import reducer from "reducers/index.reducer";
 import rootSaga from "sagas/index.saga";
 import {logger} from "redux-logger";
 
+import { composeWithDevTools } from 'redux-devtools-extension';
+
 const sagaMiddleware = createSagaMiddleware();
 
-let store = createStore(reducer, applyMiddleware(sagaMiddleware, logger));
+const store = createStore(reducer, composeWithDevTools(
+    applyMiddleware(sagaMiddleware, logger),
+));
 
 sagaMiddleware.run(rootSaga);
 
