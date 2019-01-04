@@ -78,7 +78,7 @@ class TaskDetails extends React.Component<> {
       <Card className={classes.card}>
         <CardHeader
           avatar={task.assignee && <Avatar src={task.assignee.avatarUrl} />}
-          title={task.title}
+          title={<a href={task.webUrl}>{task.title}</a>}
           subheader={task.assignee ? task.assignee.name : "Aucun assigné"}
         />
         <CardActions className={classes.actions} disableActionSpacing>
