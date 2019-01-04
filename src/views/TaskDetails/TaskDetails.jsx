@@ -19,7 +19,7 @@ import ImputationCard from "components/ImputationCard/ImputationCard";
 import { getStatus, getTypeTask } from "utils/TaskHelper";
 import { secondsToHms } from "utils/TimeHelper";
 import {
-  getSumConsomned,
+  getSumConsumed,
   getSkid,
   getPourcentProgress
 } from "utils/ManagementHelper";
@@ -105,7 +105,7 @@ class TaskDetails extends React.Component<> {
             label={
               task.consumedTime
                 ? `${secondsToHms(
-                    getSumConsomned(task.consumedTime)
+                    getSumConsumed(task.consumedTime)
                   )} consomnées`
                 : "00h00 consomnées"
             }
@@ -125,7 +125,7 @@ class TaskDetails extends React.Component<> {
             label={
               task.remainingTime || task.remainingTime === 0
                 ? `${getPourcentProgress(
-                    getSumConsomned(task.consumedTime),
+                    getSumConsumed(task.consumedTime),
                     task.remainingTime
                   )} d'avancement`
                 : "Impossible de calculer l'avancement"
@@ -138,14 +138,14 @@ class TaskDetails extends React.Component<> {
             label={`${secondsToHms(
               getSkid(
                 task.estimatedTime,
-                getSumConsomned(task.consumedTime),
+                getSumConsumed(task.consumedTime),
                 task.remainingTime
               )
             )} de dérapage`}
             className={
               getSkid(
                 task.estimatedTime,
-                getSumConsomned(task.consumedTime),
+                getSumConsumed(task.consumedTime),
                 task.remainingTime
               ) > 0 && classes.chipDerapageBad
             }

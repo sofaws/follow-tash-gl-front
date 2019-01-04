@@ -16,7 +16,7 @@ import CardBody from "components/Card/CardBody.jsx";
 
 import { connect } from "react-redux";
 import { getUserById } from "reducers/index.reducer";
-import {getActiveTaskAtUser, getConsumnedByUser} from "reducers/index.reducer";
+import {getActiveTaskAtUser, getConsumedByUser} from "reducers/index.reducer";
 import {secondsToHms} from "utils/TimeHelper";
 import Chip from "@material-ui/core/Chip";
 
@@ -47,7 +47,7 @@ class UserProfile extends React.Component {
   render() {
     if (!this.props.user) return null;
 
-    const { classes, user: { member, tasks }, assignedTasks, totalConsomnedTime } = this.props;
+    const { classes, user: { member, tasks }, assignedTasks, totalConsumedTime } = this.props;
     return (
       <div>
         <GridContainer>
@@ -100,7 +100,7 @@ class UserProfile extends React.Component {
                 <h6 className={classes.cardCategory}>@{member.username}</h6>
                 <h4 className={classes.cardTitle}>{member.name}</h4>
                   <Chip
-                      label={`${secondsToHms(totalConsomnedTime)} de consommée sur le projet`}
+                      label={`${secondsToHms(totalConsumedTime)} de consommées sur le projet`}
                       variant="outlined"
                   />
                 <p className={classes.description}>
@@ -124,7 +124,7 @@ function mapStateToProps(state, props) {
   return {
     user: getUserById(state, { id: props.match.params.id }),
     assignedTasks: getActiveTaskAtUser(state, { id: props.match.params.id }),
-    totalConsomnedTime: getConsumnedByUser(state, { id: props.match.params.id })
+    totalConsumedTime: getConsumedByUser(state, { id: props.match.params.id })
   };
 }
 

@@ -18,12 +18,12 @@ export default combineReducers({
 export const getAllTasks = state => fromTasks.getAllTasks(state.tasks);
 export const getTaskById = (state, props) =>
   fromTasks.getTaskById(state.tasks, props);
+export const getTotalConsumed = state => fromTasks.getTotalConsumed(state.tasks);
 
 export const getAllUsers = state => fromUsers.getAllUsers(state.users);
 export const getUserById = (state, props) =>
   fromUsers.getUserById(state.users, props);
-export const getConsumnedByUser = (state, props) => fromUsers.getConsumnedByUser(state.users, props);
-
+export const getConsumedByUser = (state, props) => fromUsers.getConsumedByUser(state.users, props);
 
 export const getStateSync = state => fromSync.getStateSync(state.sync);
 export const getSyncLoading = state => fromSync.getSyncLoading(state.sync);

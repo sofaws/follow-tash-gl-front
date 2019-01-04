@@ -7,7 +7,7 @@ import Avatar from "@material-ui/core/Avatar/Avatar";
 import { getStatus } from "utils/TaskHelper";
 import { secondsToHms } from "utils/TimeHelper";
 import {
-  getSumConsomned,
+  getSumConsumed,
   getSkid,
   getPourcentProgress
 } from "utils/ManagementHelper";
@@ -90,19 +90,19 @@ function TableTasks({ classes, tasks, history }) {
           ),
           task.estimatedTime ? secondsToHms(task.estimatedTime) : "Non éstimée",
           task.consumedTime
-            ? secondsToHms(getSumConsomned(task.consumedTime))
+            ? secondsToHms(getSumConsumed(task.consumedTime))
             : "00h00",
           task.remainingTime || task.remainingTime === 0
             ? secondsToHms(task.remainingTime)
             : "Non renseigné",
           getPourcentProgress(
-            getSumConsomned(task.consumedTime),
+            getSumConsumed(task.consumedTime),
             task.remainingTime
           ),
           `${secondsToHms(
             getSkid(
               task.estimatedTime,
-              getSumConsomned(task.consumedTime),
+              getSumConsumed(task.consumedTime),
               task.remainingTime
             )
           )}`

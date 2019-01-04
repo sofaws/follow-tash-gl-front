@@ -12,7 +12,7 @@ import CardActions from '@material-ui/core/CardActions';
 
 import { secondsToHms } from "utils/TimeHelper";
 import {getRouteWithParams} from "utils/RouterHelper";
-import {getSumConsomned} from "utils/ManagementHelper";
+import {getSumConsumed} from "utils/ManagementHelper";
 import './activeTaskStyle.css';
 
 
@@ -55,7 +55,7 @@ const ActiveTaskComponent = ({task, history}: Props) => (
                     className="bold"
                 />
                 <Chip
-                    label={`Réel ${secondsToHms(getSumConsomned(task.consumedTime))}`}
+                    label={`Réel ${secondsToHms(getSumConsumed(task.consumedTime))}`}
                     color="secondary"
                     className="bold"
                 />

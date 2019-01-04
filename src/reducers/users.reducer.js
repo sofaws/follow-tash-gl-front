@@ -1,5 +1,5 @@
 import { createSelector } from "reselect";
-import {getSumConsomned} from "utils/ManagementHelper";
+import {getSumConsumed} from "utils/ManagementHelper";
 
 ////////////////////
 //  Action types  //
@@ -48,11 +48,11 @@ export const getUserById = (state, props) => {
   return state.find(user => user.member.id === Number(props.id));
 };
 
-export const getConsumnedByUser = createSelector(
+export const getConsumedByUser = createSelector(
     [getUserById],
     (user) => {
       if (!user) return [];
-      return user.tasks.reduce((acc, task) => acc + getSumConsomned(task.consumedTime), 0)
+      return user.tasks.reduce((acc, task) => acc + getSumConsumed(task.consumedTime), 0)
     }
 );
 

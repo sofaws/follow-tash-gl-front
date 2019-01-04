@@ -2,6 +2,9 @@
 ////////////////////
 //  Action types  //
 ////////////////////
+import {createSelector} from "reselect";
+import {getSumConsumed} from "utils/ManagementHelper";
+
 export const TASKS_FETCH_REQUEST = "TASKS_FETCH_REQUEST";
 const TASKS_FETCH_SUCCESS = "TASKS_FETCH_SUCCESS";
 const TASKS_FETCH_FAILURE = "TASKS_FETCH_FAILURE";
@@ -45,5 +48,13 @@ export const getAllTasks = state => state;
 export const getTaskById = (state, props) => {
   return state.find(task => task.id === Number(props.id));
 };
+
+export const getTotalConsumed = createSelector(
+    [getAllTasks],
+    (tasks) => {
+        return tasks.reduce((acc, task) => acc + getSumConsumed(task.consumedTime), 0)
+    }
+);
+
 
 export default tasksReducer;

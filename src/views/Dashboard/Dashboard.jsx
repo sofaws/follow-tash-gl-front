@@ -19,8 +19,8 @@ import CardFooter from "components/Card/CardFooter.jsx";
 import dashboardStyle from "assets/jss/material-dashboard-react/views/dashboardStyle.jsx";
 import { getStatus } from "utils/TaskHelper";
 import { connect } from "react-redux";
-import { getAllTasks } from "reducers/index.reducer";
-import {getNotAssignedUsers} from "reducers/index.reducer";
+import { getAllTasks, getTotalConsumed, getNotAssignedUsers } from "reducers/index.reducer";
+import {secondsToHms} from "utils/TimeHelper";
 
 class Dashboard extends React.Component {
   memberIsAssigned = member => {
@@ -32,7 +32,7 @@ class Dashboard extends React.Component {
   };
 
   render() {
-    const { classes, history, tasks, usersNotAssigned } = this.props;
+    const { classes, history, tasks, usersNotAssigned, totalConsumedTime } = this.props;
     return (
       <div>
         <GridContainer>
@@ -142,6 +142,26 @@ class Dashboard extends React.Component {
               </CardBody>
             </Card>
           </GridItem>
+          <GridItem xs={12} sm={12} md={6}>
+            <Card>
+              <CardHeader color="success">
+                <h4 className={classes.cardTitleWhite}>Des chiffres</h4>
+                <p className={classes.cardCategoryWhite}>
+                  Mais pas de lettres..
+                </p>
+              </CardHeader>
+              <CardBody>
+                <div className={classes.boxNumbersStats}>
+                  <h3 className={classes.cardTitle}>
+                    {secondsToHms(totalConsumedTime)}
+                  </h3>
+                  <p className={classes.titleNumberStats}>
+                  heures de consommées sur le projet.
+                  </p>
+                </div>
+              </CardBody>
+            </Card>
+          </GridItem>
         </GridContainer>
       </div>
     );
@@ -156,7 +176,8 @@ Dashboard.propTypes = {
 function mapStateToProps(state) {
   return {
     tasks: getAllTasks(state),
-    usersNotAssigned: getNotAssignedUsers(state)
+    usersNotAssigned: getNotAssignedUsers(state),
+    totalConsumedTime: getTotalConsumed(state)
   };
 }
 
