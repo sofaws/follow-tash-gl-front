@@ -13,7 +13,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Chip from "@material-ui/core/Chip/Chip";
-
+import ReactMarkdown from 'react-markdown';
 import ImputationCard from "components/ImputationCard/ImputationCard";
 
 import { getStatus, getTypeTask } from "utils/TaskHelper";
@@ -81,9 +81,6 @@ class TaskDetails extends React.Component<> {
           title={task.title}
           subheader={task.assignee ? task.assignee.name : "Aucun assigné"}
         />
-        <CardContent>
-          <Typography component="p">{task.description}</Typography>
-        </CardContent>
         <CardActions className={classes.actions} disableActionSpacing>
           <Chip
             label={getStatus(task.labels, task.state)}
@@ -169,16 +166,19 @@ class TaskDetails extends React.Component<> {
           <CardContent>
             <Typography variant="h6">Liste des imputations</Typography>
             {task.consumedTime ? (
-              _.map(task.consumedTime, task => (
-                <ImputationCard key={task.user.id} {...task} />
-              ))
+                _.map(task.consumedTime, task => (
+                    <ImputationCard key={task.user.id} {...task} />
+                ))
             ) : (
-              <Typography component="p">
-                Aucunes imputations pour cette tâche
-              </Typography>
+                <Typography component="p">
+                  Aucunes imputations pour cette tâche
+                </Typography>
             )}
           </CardContent>
         </Collapse>
+        <CardContent>
+          <Typography component="p"><ReactMarkdown source={task.description} /></Typography>
+        </CardContent>
       </Card>
     );
   }
