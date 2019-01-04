@@ -21,3 +21,16 @@ export const TYPES = ["Front", "Back", "BugFix", "Autres"];
  * @type {number}
  */
 export const TIME_TO_RELOAD = 1;
+
+
+/**
+ * GESTION OF COST
+ */
+
+const DEVELOPPER_COST = 60;
+const MANAGER_COST = 100;
+
+export const DEFAULT_COST_BY_HOUR = DEVELOPPER_COST;
+export const OTHERS_COST = {
+    "sofaws": MANAGER_COST,
+};

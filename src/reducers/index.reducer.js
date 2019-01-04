@@ -19,11 +19,13 @@ export const getAllTasks = state => fromTasks.getAllTasks(state.tasks);
 export const getTaskById = (state, props) =>
   fromTasks.getTaskById(state.tasks, props);
 export const getTotalConsumed = state => fromTasks.getTotalConsumed(state.tasks);
+export const getTotalCost = state => fromTasks.getTotalCost(state.tasks);
 
 export const getAllUsers = state => fromUsers.getAllUsers(state.users);
 export const getUserById = (state, props) =>
   fromUsers.getUserById(state.users, props);
 export const getConsumedByUser = (state, props) => fromUsers.getConsumedByUser(state.users, props);
+export const getCostByUser = (state, props) => fromUsers.getCostByUser(state.users, props);
 
 export const getStateSync = state => fromSync.getStateSync(state.sync);
 export const getSyncLoading = state => fromSync.getSyncLoading(state.sync);

@@ -16,7 +16,7 @@ import CardBody from "components/Card/CardBody.jsx";
 
 import { connect } from "react-redux";
 import { getUserById } from "reducers/index.reducer";
-import {getActiveTaskAtUser, getConsumedByUser} from "reducers/index.reducer";
+import {getActiveTaskAtUser, getConsumedByUser, getCostByUser} from "reducers/index.reducer";
 import {secondsToHms} from "utils/TimeHelper";
 import Chip from "@material-ui/core/Chip";
 
@@ -39,6 +39,14 @@ const styles = {
   },
   containCards: {
     padding: 25
+  },
+  chip: {
+    margin: "10px"
+  },
+  valueImportant: {
+    color: "#3C4858",
+    fontWeight: "600",
+    fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
   }
 };
 
@@ -47,7 +55,7 @@ class UserProfile extends React.Component {
   render() {
     if (!this.props.user) return null;
 
-    const { classes, user: { member, tasks }, assignedTasks, totalConsumedTime } = this.props;
+    const { classes, user: { member, tasks }, assignedTasks, totalConsumedTime, totalCost } = this.props;
     return (
       <div>
         <GridContainer>
@@ -100,9 +108,15 @@ class UserProfile extends React.Component {
                 <h6 className={classes.cardCategory}>@{member.username}</h6>
                 <h4 className={classes.cardTitle}>{member.name}</h4>
                   <Chip
-                      label={`${secondsToHms(totalConsumedTime)} de consommées sur le projet`}
+                      className={classes.chip}
+                      label={<p><span className={classes.valueImportant}>{secondsToHms(totalConsumedTime)}</span> de consommées sur le projet</p>}
                       variant="outlined"
                   />
+                <Chip
+                    className={classes.chip}
+                    label={<p>Coût de <span className={classes.valueImportant}>{totalCost}</span> euros</p>}
+                    variant="outlined"
+                />
                 <p className={classes.description}>
                   Un grand développeur ...comme tous les autres.
                 </p>
@@ -124,7 +138,8 @@ function mapStateToProps(state, props) {
   return {
     user: getUserById(state, { id: props.match.params.id }),
     assignedTasks: getActiveTaskAtUser(state, { id: props.match.params.id }),
-    totalConsumedTime: getConsumedByUser(state, { id: props.match.params.id })
+    totalConsumedTime: getConsumedByUser(state, { id: props.match.params.id }),
+    totalCost: getCostByUser(state, { id: props.match.params.id })
   };
 }
 

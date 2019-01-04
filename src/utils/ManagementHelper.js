@@ -41,7 +41,17 @@ export function getPourcentProgress(imputed: number, raf: number) {
 export function getSumConsumed(consumed: object) {
   if (!consumed) return null;
   return Object.values(consumed).reduce(
-    (accumulator, currentValue) => accumulator + currentValue.time,
-    0
+      (accumulator, currentValue) => accumulator + currentValue.time,
+      0
   );
+}
+
+/**
+ * Calcul the cost
+ * @param consumed (second)
+ * @param cost
+ * @returns {number}
+ */
+export function calculCost(consumed, cost) {
+  return (consumed / 3600) * cost;
 }

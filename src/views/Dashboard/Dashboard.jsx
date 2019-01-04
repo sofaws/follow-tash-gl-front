@@ -19,7 +19,7 @@ import CardFooter from "components/Card/CardFooter.jsx";
 import dashboardStyle from "assets/jss/material-dashboard-react/views/dashboardStyle.jsx";
 import { getStatus } from "utils/TaskHelper";
 import { connect } from "react-redux";
-import { getAllTasks, getTotalConsumed, getNotAssignedUsers } from "reducers/index.reducer";
+import { getAllTasks, getTotalConsumed, getNotAssignedUsers, getTotalCost } from "reducers/index.reducer";
 import {secondsToHms} from "utils/TimeHelper";
 
 class Dashboard extends React.Component {
@@ -32,7 +32,7 @@ class Dashboard extends React.Component {
   };
 
   render() {
-    const { classes, history, tasks, usersNotAssigned, totalConsumedTime } = this.props;
+    const { classes, history, tasks, usersNotAssigned, totalConsumedTime, totalCost } = this.props;
     return (
       <div>
         <GridContainer>
@@ -159,6 +159,14 @@ class Dashboard extends React.Component {
                   heures de consommées sur le projet.
                   </p>
                 </div>
+                <div className={classes.boxNumbersStats}>
+                  <h3 className={classes.cardTitle}>
+                    {totalCost} euros
+                  </h3>
+                  <p className={classes.titleNumberStats}>
+                    consommés sur le projet.
+                  </p>
+                </div>
               </CardBody>
             </Card>
           </GridItem>
@@ -177,7 +185,8 @@ function mapStateToProps(state) {
   return {
     tasks: getAllTasks(state),
     usersNotAssigned: getNotAssignedUsers(state),
-    totalConsumedTime: getTotalConsumed(state)
+    totalConsumedTime: getTotalConsumed(state),
+    totalCost: getTotalCost(state),
   };
 }
 

@@ -1,5 +1,7 @@
 import { createSelector } from "reselect";
 import {getSumConsumed} from "utils/ManagementHelper";
+import {DEFAULT_COST_BY_HOUR, OTHERS_COST} from "../config";
+import {calculCost} from "utils/ManagementHelper";
 
 ////////////////////
 //  Action types  //
@@ -51,8 +53,19 @@ export const getUserById = (state, props) => {
 export const getConsumedByUser = createSelector(
     [getUserById],
     (user) => {
-      if (!user) return [];
-      return user.tasks.reduce((acc, task) => acc + getSumConsumed(task.consumedTime), 0)
+      if (!user) return 0;
+      return user.tasks.reduce((acc, task) => {
+          if(!task.consumedTime || !task.consumedTime[user.member.username]) return acc;
+          return acc + task.consumedTime[user.member.username].time
+      }, 0)
+    }
+);
+
+export const getCostByUser = createSelector(
+    [getConsumedByUser, getUserById],
+    (consomned, user) => {
+        if (!user) return 0;
+        return calculCost(consomned, OTHERS_COST[user.member.username] || DEFAULT_COST_BY_HOUR);
     }
 );
 
