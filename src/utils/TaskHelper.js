@@ -1,4 +1,4 @@
-import { STATUS, TYPES } from "../config";
+import { STATUS, TYPES, LOTS, ILOTS } from "../config";
 
 /**
  * Return the status of a task
@@ -21,4 +21,26 @@ export function getStatus(labels, state) {
 export function getTypeTask(labels) {
   const type = labels.find(element => TYPES.includes(element));
   return type;
+}
+
+/**
+ * Return the type of a task
+ * @param labels
+ * @returns {string}
+ */
+export function getLotTask(labels) {
+    const lot = labels.find(element => LOTS.includes(element));
+    return lot;
+}
+
+
+
+/**
+ * Return the type of a task
+ * @param labels
+ * @returns {string}
+ */
+export function getIlotTask(labels) {
+    const ilot = labels.find(element => ILOTS.includes(element));
+    return ilot;
 }

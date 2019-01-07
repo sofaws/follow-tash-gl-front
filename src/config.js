@@ -17,6 +17,18 @@ export const STATUS = ["opened", "To Do", "Doing", "closed", "Blocked"];
 export const TYPES = ["Front", "Back", "BugFix", "Autres"];
 
 /**
+ * List of different lots of tasks configured on your gitlab
+ * @type {string[]}
+ */
+export const LOTS = ["LOT 1 - Restaurant", "LOT 2 - Hôtel"];
+
+/**
+ * List of different ilots of tasks configured on your gitlab
+ * @type {string[]}
+ */
+export const ILOTS = ["Ilôt 1", "Ilôt 2"];
+
+/**
  * Delays in minutes before each synchronization with the API
  * @type {number}
  */

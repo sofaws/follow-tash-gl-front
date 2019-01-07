@@ -7,12 +7,14 @@ import Grid from "@material-ui/core/Grid/Grid";
 
 import FilterStatus from "components/Filters/FilterStatus";
 import FilterText from "components/Filters/FilterText";
+import FilterIlot from "components/Filters/FilterIlot";
 import TableTasks from "components/Table/TableTasks";
 import Card from "components/Card/Card.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
 import CardBody from "components/Card/CardBody.jsx";
+import FilterLot from "components/Filters/FilterLot";
 
-import { getStatus } from "utils/TaskHelper";
+import { getStatus, getLotTask, getIlotTask } from "utils/TaskHelper";
 import {getAllTasks} from "reducers/index.reducer";
 
 const styles = {
@@ -53,18 +55,26 @@ type Props = {
 class TasksList extends React.Component<Props> {
     state = {
         status: [],
+        lots: [],
         filterText: '',
+        ilots: [],
     };
 
     filterTasks = () => {
-        const { status, filterText } = this.state;
+        const { status, filterText, lots, ilots } = this.state;
         const { tasks } = this.props;
-        const filterTextUppercase = filterText.toUpperCase();return tasks.filter(
-            element => (status.length === 0
-                || status.includes(getStatus(element.labels, element.state)))
+        const filterTextUppercase = filterText.toUpperCase();
+        return tasks.filter(
+            element => (status.length === 0 || status.includes(getStatus(element.labels, element.state)))
                 && (filterText === '' || element.title.toUpperCase().includes(filterTextUppercase)
                     || (element.assignee
                         && element.assignee.name.toUpperCase().includes(filterTextUppercase))
+                )
+                && (lots.length === 0
+                    || lots.includes(getLotTask(element.labels))
+                )
+                && (ilots.length === 0
+                    || ilots.includes(getIlotTask(element.labels))
                 ),
         );
     };
@@ -76,9 +86,8 @@ class TasksList extends React.Component<Props> {
 
     render() {
         const {classes, history} = this.props;
-        const {status, filterText} = this.state;
+        const {status, filterText, lots, ilots} = this.state;
         const tasksFilter = this.filterTasks();
-
         return (
             <Card>
                 <CardHeader color="primary">
@@ -95,6 +104,8 @@ class TasksList extends React.Component<Props> {
                         alignItems="center"
                     >
                         <FilterStatus name={status} handleChange={this.handleChangeFilter('status')} />
+                        <FilterLot name={lots} handleChange={this.handleChangeFilter('lots')} />
+                        <FilterIlot name={ilots} handleChange={this.handleChangeFilter('ilots')} />
                         <FilterText name={filterText} handleChange={this.handleChangeFilter('filterText')} />
                     </Grid>
                     <TableTasks tasks={tasksFilter} />

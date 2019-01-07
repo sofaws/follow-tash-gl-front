@@ -16,7 +16,7 @@ import Chip from "@material-ui/core/Chip/Chip";
 import ReactMarkdown from 'react-markdown';
 import ImputationCard from "components/ImputationCard/ImputationCard";
 
-import { getStatus, getTypeTask } from "utils/TaskHelper";
+import { getStatus, getTypeTask, getLotTask } from "utils/TaskHelper";
 import { secondsToHms } from "utils/TimeHelper";
 import {
   getSumConsumed,
@@ -78,7 +78,7 @@ class TaskDetails extends React.Component<> {
       <Card className={classes.card}>
         <CardHeader
           avatar={task.assignee && <Avatar src={task.assignee.avatarUrl} />}
-          title={<a href={task.webUrl}>{task.title}</a>}
+          title={<a href={task.webUrl}>{ getLotTask(task.labels)} - {task.title}</a>}
           subheader={task.assignee ? task.assignee.name : "Aucun assigné"}
         />
         <CardActions className={classes.actions} disableActionSpacing>
@@ -87,6 +87,7 @@ class TaskDetails extends React.Component<> {
             className={classes.chip}
             color="secondary"
           />
+
           <Chip
             label={getTypeTask(task.labels) || "Aucun type"}
             className={classes.chip}
