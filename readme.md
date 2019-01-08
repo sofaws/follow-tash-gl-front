@@ -9,9 +9,9 @@
 - [x] Gestion filtre par lot
 - [x] Gestion filtre par ilot 
 
-- [ ] Avancement d'un lot
-- [ ] Dérapage d'un lot
-- [ ] RAF d'un lot
+- [x] Avancement d'un lot
+- [x] Dérapage d'un lot
+- [x] RAF d'un lot
 
 - [ ] Avancement d'un ilot
 - [ ] Dérapage d'un ilot
@@ -20,7 +20,11 @@
 - [ ] Avancement du projet
 - [ ] Dérapage du projet
 - [ ] RAF sur le projet 
-
 - [ ] Estimé total sur le projet
 - [ ] Indicateur sur les tâches réalisées
 - [ ] Indicateurs sur les retours
+
+
+
+
+- [ ] Rendre lots et ilots facultatif via config

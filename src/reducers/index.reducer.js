@@ -3,6 +3,7 @@ import tasksReducer, * as fromTasks from "./tasks.reducer";
 import usersReducer, * as fromUsers from "./users.reducer";
 import syncReducer, * as fromSync from "./sync.reducer";
 import { createSelector } from "reselect";
+import {getIlotTask} from "../utils/TaskHelper";
 
 export default combineReducers({
   tasks: tasksReducer,
@@ -20,6 +21,7 @@ export const getTaskById = (state, props) =>
   fromTasks.getTaskById(state.tasks, props);
 export const getTotalConsumed = state => fromTasks.getTotalConsumed(state.tasks);
 export const getTotalCost = state => fromTasks.getTotalCost(state.tasks);
+export const getTasksByLots = state => fromTasks.getTasksByLots(state.tasks);
 
 export const getAllUsers = state => fromUsers.getAllUsers(state.users);
 export const getUserById = (state, props) =>
@@ -49,3 +51,4 @@ export const getActiveTaskAtUser = createSelector(
     return tasks.filter(task => task.assigneeId === user.member.id);
   }
 );
+

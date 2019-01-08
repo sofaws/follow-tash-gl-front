@@ -39,8 +39,8 @@ export function getPourcentProgress(imputed: number, raf: number) {
  * @returns {object}
  */
 export function getSumConsumed(consumed: object) {
-  if (!consumed) return null;
-  return Object.values(consumed).reduce(
+    if (!consumed) return null;
+     return Object.values(consumed).reduce(
       (accumulator, currentValue) => accumulator + currentValue.time,
       0
   );
