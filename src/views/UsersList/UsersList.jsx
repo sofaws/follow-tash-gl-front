@@ -16,6 +16,7 @@ import FilterText from "components/Filters/FilterText";
 
 import { connect } from "react-redux";
 import { getAllUsers } from "reducers/index.reducer";
+import {DESCRIPTION_MEMBER} from "../../config";
 
 const styles = () => ({
   cardCategoryWhite: {
@@ -77,9 +78,11 @@ class UsersContainer extends React.Component {
     const { users } = this.props;
     if (!filter) return users;
     return users.filter(user => {
-      return (
+       const descriptionUser = DESCRIPTION_MEMBER[user.member.username];
+        return (
         user.member.name.toUpperCase().includes(filter.toUpperCase()) ||
-        user.member.username.toUpperCase().includes(filter.toUpperCase())
+        user.member.username.toUpperCase().includes(filter.toUpperCase()) ||
+        (descriptionUser && descriptionUser.toUpperCase().includes(filter.toUpperCase()))
       );
     });
   };
