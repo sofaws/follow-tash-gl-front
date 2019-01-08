@@ -5,6 +5,7 @@ import {createSelector} from "reselect";
 import {getSumConsumed, calculCost} from "utils/ManagementHelper";
 import {DEFAULT_COST_BY_HOUR, OTHERS_COST} from "../config";
 import {getLotTask} from "../utils/TaskHelper";
+import {getCostOfListTasks} from "../utils/ManagementHelper";
 
 export const TASKS_FETCH_REQUEST = "TASKS_FETCH_REQUEST";
 const TASKS_FETCH_SUCCESS = "TASKS_FETCH_SUCCESS";
@@ -60,13 +61,7 @@ export const getTotalConsumed = createSelector(
 export const getTotalCost = createSelector(
     [getAllTasks],
     (tasks) => {
-        return tasks.reduce((acc, task) => {
-            if (!task.consumedTime) return acc;
-            Object.values(task.consumedTime).forEach(element => {
-                acc = acc + calculCost(element.time, OTHERS_COST[element.user.username] || DEFAULT_COST_BY_HOUR);
-            });
-            return acc;
-        }, 0);
+        return getCostOfListTasks(tasks);
     }
 );
 
@@ -96,7 +91,8 @@ export const getTasksByLots = createSelector(
                tasks,
                consumedTotal,
                estimateTotal,
-               remainingTime
+               remainingTime,
+               totalCost: getCostOfListTasks(tasks)
        }
        })
     }

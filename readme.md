@@ -3,7 +3,7 @@
 - [x] Coût par personne 
 - [x] Coût total sur le projet 
 
-- [ ] cout par tache
+- [x] cout par tache
 - [ ] Nombre de retours sur une tâche 
 
 - [x] Gestion filtre par lot
@@ -12,6 +12,7 @@
 - [x] Avancement d'un lot
 - [x] Dérapage d'un lot
 - [x] RAF d'un lot
+- [x] Coût d'un lot
 
 - [ ] Avancement d'un ilot
 - [ ] Dérapage d'un ilot

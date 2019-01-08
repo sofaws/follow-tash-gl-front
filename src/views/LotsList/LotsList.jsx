@@ -104,6 +104,13 @@ class LotsList extends React.Component<> {
                                         ) > 0 && classes.chipDerapageBad
                                     }
                                 />
+
+                                <Chip
+                                    label={`${lot.totalCost} euros consomnés`}
+                                    className={classes.chip}
+                                    variant="outlined"
+                                />
+
                                 <Typography className={classes.title}>
                                    Liste des tâches
                                 </Typography>

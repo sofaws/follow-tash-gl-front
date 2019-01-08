@@ -1,3 +1,5 @@
+import {DEFAULT_COST_BY_HOUR, OTHERS_COST} from "../config";
+
 /**
  * calculates the skid of a task
  * @param estimated (second)
@@ -54,4 +56,29 @@ export function getSumConsumed(consumed: object) {
  */
 export function calculCost(consumed, cost) {
   return (consumed / 3600) * cost;
+}
+
+/**
+ * Return the cost of one task
+ * @param task
+ */
+export function getCostOfTask(task) {
+    return Object.values(task.consumedTime).reduce((acc, element) => {
+        return acc + calculCost(element.time, OTHERS_COST[element.user.username] || DEFAULT_COST_BY_HOUR);
+    }, 0);
+}
+
+/**
+ * Return the cost of list of tasks
+ * @param tasks
+ * @returns {*}
+ */
+export function getCostOfListTasks(tasks) {
+    return tasks.reduce((acc, task) => {
+        if (!task.consumedTime) return acc;
+        Object.values(task.consumedTime).forEach(element => {
+            acc = acc + calculCost(element.time, OTHERS_COST[element.user.username] || DEFAULT_COST_BY_HOUR);
+        });
+        return acc;
+    }, 0)
 }
