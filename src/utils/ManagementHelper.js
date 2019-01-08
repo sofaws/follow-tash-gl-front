@@ -63,6 +63,7 @@ export function calculCost(consumed, cost) {
  * @param task
  */
 export function getCostOfTask(task) {
+    if(!task.consumedTime) return 0;
     return Object.values(task.consumedTime).reduce((acc, element) => {
         return acc + calculCost(element.time, OTHERS_COST[element.user.username] || DEFAULT_COST_BY_HOUR);
     }, 0);
