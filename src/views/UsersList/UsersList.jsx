@@ -14,7 +14,6 @@ import GridContainer from "components/Grid/GridContainer";
 import GridItem from "components/Grid/GridItem";
 import FilterText from "components/Filters/FilterText";
 
-import api from "../../utils/Api.js";
 import { connect } from "react-redux";
 import { getAllUsers } from "reducers/index.reducer";
 
@@ -120,7 +119,7 @@ class UsersContainer extends React.Component {
                         >
                           <div className={classes.details}>
                             <CardContent className={classes.content}>
-                              <Typography component="h5" variant="h5">
+                              <Typography component="h5" variant="p">
                                 {user.name}
                               </Typography>
                               <Typography
