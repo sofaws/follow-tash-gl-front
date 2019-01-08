@@ -85,6 +85,7 @@ export const getTasksByLots = createSelector(
                 ]
             }
         }, {});
+
        return Object.keys(tasksByLots).map(lot => {
            const tasks = tasksByLots[lot];
            const consumedTotal = tasks.reduce((acc, task) => acc + getSumConsumed(task.consumedTime), 0);

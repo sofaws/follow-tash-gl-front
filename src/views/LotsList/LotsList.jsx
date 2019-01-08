@@ -1,5 +1,4 @@
 import React from "react";
-import {LOTS} from '../../config';
 
 import withStyles from "@material-ui/core/styles/withStyles";
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
@@ -12,7 +11,7 @@ import {getTasksByLots} from "reducers/index.reducer";
 import TableTasks from "components/Table/TableTasks";
 import Chip from "@material-ui/core/es/Chip/Chip";
 import {secondsToHms} from "../../utils/TimeHelper";
-import {getPourcentProgress, getSkid, getSumConsumed} from "../../utils/ManagementHelper";
+import {getPourcentProgress, getSkid} from "../../utils/ManagementHelper";
 
 const styles = theme => ({
     root: {
@@ -41,11 +40,10 @@ const styles = theme => ({
 class LotsList extends React.Component<> {
     render() {
         const {classes, lots} = this.props;
-        console.log(lots);
         return (
             <div className={classes.root}>
                 {lots.map(lot =>
-                    <ExpansionPanel>
+                    <ExpansionPanel key={lot.title}>
                         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
                             <Typography className={classes.heading}>{lot.title}</Typography>
                         </ExpansionPanelSummary>
