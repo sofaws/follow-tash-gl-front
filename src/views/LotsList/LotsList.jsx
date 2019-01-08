@@ -101,7 +101,7 @@ class LotsList extends React.Component<> {
                                             lot.estimateTotal,
                                             lot.consumedTotal,
                                             lot.remainingTime
-                                        ) > 0 && classes.chipDerapageBad
+                                        ) > 0 ? classes.chipDerapageBad : classes.chip
                                     }
                                 />
 
