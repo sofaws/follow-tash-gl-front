@@ -47,5 +47,13 @@ export const OTHERS_COST = {
     "sofaws": MANAGER_COST,
 };
 
+/**
+ * DESCRIPTION DES DEVELOPPEURS
+ */
+export const DESCRIPTION_DEFAULT = "Un grand développeur, comme tous les autres..";
+export const DESCRIPTION_MEMBER = {
+    "sofaws": "Le plus grand développeur de G4",
+    "aifedespaix": "Le plus nul développeur de G4.."
+};
 
 

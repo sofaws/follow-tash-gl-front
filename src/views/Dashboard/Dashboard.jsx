@@ -19,8 +19,9 @@ import CardFooter from "components/Card/CardFooter.jsx";
 import dashboardStyle from "assets/jss/material-dashboard-react/views/dashboardStyle.jsx";
 import { getStatus } from "utils/TaskHelper";
 import { connect } from "react-redux";
-import { getAllTasks, getTotalConsumed, getNotAssignedUsers, getTotalCost } from "reducers/index.reducer";
+import { getAllTasks, getTotalConsumed, getNotAssignedUsers, getTotalCost, getTotalEstimated, getTotalRaf, getTotalSkid, getTotalProgess } from "reducers/index.reducer";
 import {secondsToHms} from "utils/TimeHelper";
+import BoxNumber from "components/BoxNumber/BoxNumber";
 
 class Dashboard extends React.Component {
   memberIsAssigned = member => {
@@ -32,7 +33,7 @@ class Dashboard extends React.Component {
   };
 
   render() {
-    const { classes, history, tasks, usersNotAssigned, totalConsumedTime, totalCost } = this.props;
+    const { classes, history, tasks, usersNotAssigned, totalConsumedTime, totalCost, totalProgess, totalRaf, totalEstimated, totalSkid } = this.props;
     return (
       <div>
         <GridContainer>
@@ -151,22 +152,12 @@ class Dashboard extends React.Component {
                 </p>
               </CardHeader>
               <CardBody>
-                <div className={classes.boxNumbersStats}>
-                  <h3 className={classes.cardTitle}>
-                    {secondsToHms(totalConsumedTime)}
-                  </h3>
-                  <p className={classes.titleNumberStats}>
-                  heures de consommées sur le projet.
-                  </p>
-                </div>
-                <div className={classes.boxNumbersStats}>
-                  <h3 className={classes.cardTitle}>
-                    {totalCost} euros
-                  </h3>
-                  <p className={classes.titleNumberStats}>
-                    consommés sur le projet.
-                  </p>
-                </div>
+                  <BoxNumber title={`${Math.round(totalProgess * 100)}%`} description={"d'avancement sur le projet"}/>
+                  <BoxNumber title={secondsToHms(totalRaf)} description={"de RAF"}/>
+                  <BoxNumber title={secondsToHms(totalConsumedTime)} description={"consommées sur le projet."}/>
+                  <BoxNumber title={secondsToHms(totalEstimated)} description={"estimées sur le projet."}/>
+                  <BoxNumber title={`${totalCost} euros`} description={"consommés sur le projet."}/>
+                  <BoxNumber title={secondsToHms(totalSkid)} description={"de dérapage sur le projet"}/>
               </CardBody>
             </Card>
           </GridItem>
@@ -187,6 +178,10 @@ function mapStateToProps(state) {
     usersNotAssigned: getNotAssignedUsers(state),
     totalConsumedTime: getTotalConsumed(state),
     totalCost: getTotalCost(state),
+    totalProgess: getTotalProgess(state),
+    totalEstimated: getTotalEstimated(state),
+    totalRaf: getTotalRaf(state),
+    totalSkid: getTotalSkid(state),
   };
 }
 

@@ -19,6 +19,7 @@ import { getUserById } from "reducers/index.reducer";
 import {getActiveTaskAtUser, getConsumedByUser, getCostByUser} from "reducers/index.reducer";
 import {secondsToHms} from "utils/TimeHelper";
 import Chip from "@material-ui/core/Chip";
+import {DESCRIPTION_DEFAULT, DESCRIPTION_MEMBER} from "../../config";
 
 const styles = {
   cardCategoryWhite: {
@@ -118,7 +119,7 @@ class UserProfile extends React.Component {
                     variant="outlined"
                 />
                 <p className={classes.description}>
-                  Un grand développeur ...comme tous les autres.
+                    { DESCRIPTION_MEMBER[member.username] || DESCRIPTION_DEFAULT}
                 </p>
                 <a href={`https://gitlab.com/${member.username}`}>
                   <Button color="primary" round>

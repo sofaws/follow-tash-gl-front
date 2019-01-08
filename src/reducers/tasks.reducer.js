@@ -4,8 +4,8 @@
 import {createSelector} from "reselect";
 import {getSumConsumed, calculCost} from "utils/ManagementHelper";
 import {DEFAULT_COST_BY_HOUR, OTHERS_COST} from "../config";
-import {getLotTask} from "../utils/TaskHelper";
-import {getCostOfListTasks} from "../utils/ManagementHelper";
+import {getLotTask} from "utils/TaskHelper";
+import {getCostOfListTasks, getProgress, getSkid} from "utils/ManagementHelper";
 
 export const TASKS_FETCH_REQUEST = "TASKS_FETCH_REQUEST";
 const TASKS_FETCH_SUCCESS = "TASKS_FETCH_SUCCESS";
@@ -53,16 +53,32 @@ export const getTaskById = (state, props) => {
 
 export const getTotalConsumed = createSelector(
     [getAllTasks],
-    (tasks) => {
-        return tasks.reduce((acc, task) => acc + getSumConsumed(task.consumedTime), 0)
-    }
+    (tasks) =>  tasks.reduce((acc, task) => acc + getSumConsumed(task.consumedTime), 0)
 );
 
 export const getTotalCost = createSelector(
     [getAllTasks],
-    (tasks) => {
-        return getCostOfListTasks(tasks);
-    }
+    (tasks) =>  getCostOfListTasks(tasks)
+);
+
+export const getTotalRaf = createSelector(
+    [getAllTasks],
+    (tasks) =>  tasks.reduce((acc, task) => acc + ((!task.remainingTime && task.remainingTime !== 0) ? task.estimatedTime : task.remainingTime), 0)
+);
+
+export const getTotalProgess = createSelector(
+    [getAllTasks, getTotalConsumed, getTotalRaf],
+    (tasks, consumedTotal, remainingTime) => getProgress(consumedTotal, remainingTime)
+);
+
+export const getTotalEstimated = createSelector(
+    [getAllTasks],
+    (tasks) => tasks.reduce((acc, task) => acc + task.estimatedTime, 0)
+);
+
+export const getTotalSkid = createSelector(
+    [getAllTasks, getTotalEstimated, getTotalConsumed, getTotalRaf],
+    (tasks, estimateTotal, consumedTotal, remainingTimeTotal ) => getSkid(estimateTotal, consumedTotal, remainingTimeTotal)
 );
 
 export const getTasksByLots = createSelector(
