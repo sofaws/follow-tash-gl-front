@@ -20,13 +20,21 @@ export const TYPES = ["Front", "Back", "BugFix", "Autres"];
  * List of different lots of tasks configured on your gitlab
  * @type {string[]}
  */
-export const LOTS = ["LOT 1 - Restaurant", "LOT 2 - Hôtel"];
+export const LOTS = ["team-1", "team-2", "team-3", "team-4", "team-5"];
 
 /**
  * List of different ilots of tasks configured on your gitlab
  * @type {string[]}
  */
-export const ILOTS = ["Ilôt 1", "Ilôt 2"];
+export const ILOTS = [
+    "Ilot des Receptionnistes",
+    "Ilot des Cuistos",
+    "Ilot des Business-Man",
+    "Ilot des Bonnes Affaires",
+    "Ilot de la Fidélisation",
+    "Ilot Tout-Terrain",
+    "Ilot Connexion"
+];
 
 /**
  * Delays in minutes before each synchronization with the API
@@ -54,7 +62,6 @@ export const DESCRIPTION_DEFAULT = "Un grand développeur, comme tous les autres
 export const DESCRIPTION_MEMBER = {
     "sofaws": "Le plus grand développeur de G4",
     "aifedespaix": "Le plus nul développeur de G4..",
-    "MaximeBlanc": "recherche un homme pas très futé"
+    "MaximeBlanc": "recherche un homme pas très futé",
 };
-
 
