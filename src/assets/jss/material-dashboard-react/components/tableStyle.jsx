@@ -32,7 +32,7 @@ const tableStyle = theme => ({
     color: grayColor
   },
   table: {
-    marginBottom: "0",
+    marginBottom: "20px",
     width: "100%",
     maxWidth: "100%",
     backgroundColor: "transparent",
