@@ -22,6 +22,7 @@ export const getTaskById = (state, props) =>
 export const getTotalConsumed = state => fromTasks.getTotalConsumed(state.tasks);
 export const getTotalCost = state => fromTasks.getTotalCost(state.tasks);
 export const getTasksByLots = state => fromTasks.getTasksByLots(state.tasks);
+export const getTasksByIlots = state => fromTasks.getTasksByIlots(state.tasks);
 export const getTotalProgess = state => fromTasks.getTotalProgess(state.tasks);
 export const getTotalRaf = state => fromTasks.getTotalRaf(state.tasks);
 export const getTotalEstimated = state => fromTasks.getTotalEstimated(state.tasks);

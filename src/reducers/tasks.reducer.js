@@ -4,7 +4,7 @@
 import {createSelector} from "reselect";
 import {getSumConsumed, calculCost} from "utils/ManagementHelper";
 import {DEFAULT_COST_BY_HOUR, OTHERS_COST} from "../config";
-import {getLotTask} from "utils/TaskHelper";
+import {getLotTask, getIlotTask} from "utils/TaskHelper";
 import {getCostOfListTasks, getProgress, getSkid} from "utils/ManagementHelper";
 
 export const TASKS_FETCH_REQUEST = "TASKS_FETCH_REQUEST";
@@ -111,6 +111,39 @@ export const getTasksByLots = createSelector(
                totalCost: getCostOfListTasks(tasks)
        }
        })
+    }
+);
+
+export const getTasksByIlots = createSelector(
+    [getAllTasks],
+    tasks => {
+        const tasksByIlots = tasks.reduce((accumulator, task) => {
+            const lot = getIlotTask(task.labels);
+            if (!lot) return accumulator;
+            const arrayIlot = accumulator[lot] || [];
+            return {
+                ...accumulator,
+                [lot]: [
+                    ...arrayIlot,
+                    task
+                ]
+            }
+        }, {});
+
+        return Object.keys(tasksByIlots).map(ilot => {
+            const tasks = tasksByIlots[ilot];
+            const consumedTotal = tasks.reduce((acc, task) => acc + getSumConsumed(task.consumedTime), 0);
+            const estimateTotal = tasks.reduce((acc, task) => acc + task.estimatedTime, 0);
+            const remainingTime = tasks.reduce((acc, task) => acc + ((!task.remainingTime && task.remainingTime !== 0) ? task.estimatedTime : task.remainingTime), 0);
+            return {
+                title: ilot,
+                tasks,
+                consumedTotal,
+                estimateTotal,
+                remainingTime,
+                totalCost: getCostOfListTasks(tasks)
+            }
+        })
     }
 );
 

@@ -9,6 +9,7 @@ import UsersList from "views/UsersList/UsersList.jsx";
 import TasksList from "views/TasksList/TasksList.jsx";
 import TaskDetails from "views/TaskDetails/TaskDetails.jsx";
 import LotsList from "views/LotsList/LotsList.jsx";
+import IlotsList from "views/IlotsList/IlotsList";
 
 const dashboardRoutes = [
     {
@@ -54,7 +55,7 @@ const dashboardRoutes = [
     {
         path: "/ilots",
         icon: EventSeat,
-        component: TaskDetails,
+        component: IlotsList,
         sidebarName: "Les ilots",
         navbarName: "Les ilots"
     },

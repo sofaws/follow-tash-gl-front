@@ -20,7 +20,26 @@ export const TYPES = ["Front", "Back", "BugFix", "Autres"];
  * List of different lots of tasks configured on your gitlab
  * @type {string[]}
  */
-export const LOTS = ["team-1", "team-2", "team-3", "team-4", "team-5"];
+export const LOTS = [
+    "Séminaire",
+    "Restaurant",
+    "Multilingue",
+    "Accueil",
+    "Légal",
+    "Accueil Back-office",
+    "Atlas",
+    "Authentification",
+    "Bons Plans",
+    "Accueil",
+    "Cercle",
+    "Culture & Loisirs",
+    "Composant générique",
+    "Droits Admin",
+    "Fidélité",
+    "Entity",
+    "Historique",
+    "Hôtel"
+];
 
 /**
  * List of different ilots of tasks configured on your gitlab

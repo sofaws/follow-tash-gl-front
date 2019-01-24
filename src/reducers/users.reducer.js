@@ -28,10 +28,12 @@ export const fetchUsersFailure = error => {
 ///////////////
 //  Reducer  //
 ///////////////
+const uniqify = (array, key, subKey) => array.reduce((prev, curr) => prev.find(a => a[key][subKey] === curr[key][subKey]) ? prev : prev.push(curr) && prev, []);
+
 const usersReducer = (state = initialState, action) => {
   switch (action.type) {
     case USERS_FETCH_SUCCESS: {
-      return action.users;
+      return uniqify(action.users, 'member', 'id');
     }
     default: {
       return [...state];
