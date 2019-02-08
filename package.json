@@ -1,11 +1,13 @@
 {
-  "name": "BigBrother",
+  "name": "bigbrother",
   "version": "1.0.0",
   "description": "Suivi des temps sur Gitlab",
   "private": false,
-  "main": "dist/index.js",
   "scripts": {
-    "start": "react-scripts start",
+    "start:front": "react-scripts start",
+    "start:server": "node server/api.js",
+    "start:cron": "node ./server/cron.js",
+    "dev:server": "nodemon ./server/cron.js",
     "build": "react-scripts build && cp build/index.html build/404.html",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
@@ -14,8 +16,7 @@
     "lint:fix": "eslint . --ext=js,jsx --fix;  exit 0",
     "build-package": "babel src --out-dir dist",
     "postinstall": "babel ./node_modules/ky/index.js --out-file ./node_modules/ky/index.js --config-file=./.babelrc",
-    "flow": "flow",
-    "dev": "nodemon server/api.js"
+    "flow": "flow"
   },
   "dependencies": {
     "@koa/cors": "2",
