@@ -1,11 +1,10 @@
 import React from "react";
 
 import withStyles from "@material-ui/core/styles/withStyles";
-import Grid from "@material-ui/core/Grid/Grid";
 import Typography from "@material-ui/core/Typography/Typography";
-
+import moment from "moment";
+import "moment/locale/fr"; // without this line it didn't work
 import TableTasks from "components/Table/TableTasks";
-import ActiveTaskComponent from "components/ActiveTaskComponent/ActiveTaskComponent";
 import GridItem from "components/Grid/GridItem.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
 import Button from "components/CustomButtons/Button.jsx";
@@ -14,9 +13,8 @@ import CardHeader from "components/Card/CardHeader.jsx";
 import CardAvatar from "components/Card/CardAvatar.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 
-import { connect } from "react-redux";
-import { getUserById } from "reducers/index.reducer";
-import {getActiveTaskAtUser, getConsumedByUser, getCostByUser} from "reducers/index.reducer";
+import {connect} from "react-redux";
+import {getActiveTaskAtUser, getConsumedByUser, getCostByUser, getUserById} from "reducers/index.reducer";
 import {secondsToHms} from "utils/TimeHelper";
 import Chip from "@material-ui/core/Chip";
 import {DESCRIPTION_DEFAULT, DESCRIPTION_MEMBER} from "../../config";
@@ -47,16 +45,21 @@ const styles = {
   valueImportant: {
     color: "#3C4858",
     fontWeight: "600",
-    fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
+    fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif"
   }
 };
 
 class UserProfile extends React.Component {
-
   render() {
     if (!this.props.user) return null;
 
-    const { classes, user: { member, tasks }, assignedTasks, totalConsumedTime, totalCost } = this.props;
+    const {
+      classes,
+      user: { member, tasks, lastDateImputation },
+      assignedTasks,
+      totalConsumedTime,
+      totalCost
+    } = this.props;
     return (
       <div>
         <GridContainer>
@@ -72,10 +75,11 @@ class UserProfile extends React.Component {
                 <Typography variant="h6" gutterBottom component="h3">
                   Tâches assignées
                 </Typography>
-                  {assignedTasks.length ?
-                      <TableTasks tasks={assignedTasks} /> : (
-                    <p>Aucune tâches assignées</p>
-                  )}
+                {assignedTasks.length ? (
+                  <TableTasks tasks={assignedTasks} />
+                ) : (
+                  <p>Aucune tâches assignées</p>
+                )}
                 <Typography variant="h6" gutterBottom component="h3">
                   Toutes les tâches
                 </Typography>
@@ -95,18 +99,40 @@ class UserProfile extends React.Component {
               <CardBody profile>
                 <h6 className={classes.cardCategory}>@{member.username}</h6>
                 <h4 className={classes.cardTitle}>{member.name}</h4>
-                  <Chip
-                      className={classes.chip}
-                      label={<p><span className={classes.valueImportant}>{secondsToHms(totalConsumedTime)}</span> de consommées sur le projet</p>}
-                      variant="outlined"
-                  />
+                <h4 className={classes.cardTitle}>
+                  {lastDateImputation
+                    ? `Dernière imputation : ${moment(lastDateImputation)
+                        .locale("fr")
+                        .format("LLL")}`
+                    : "Aucune imputation"}
+                </h4>
                 <Chip
-                    className={classes.chip}
-                    label={<p>Coût de <span className={classes.valueImportant}>{totalCost}</span> euros</p>}
-                    variant="outlined"
+                  className={classes.chip}
+                  label={
+                    <p>
+                      <span className={classes.valueImportant}>
+                        {secondsToHms(totalConsumedTime)}
+                      </span>{" "}
+                      de consommées sur le projet
+                    </p>
+                  }
+                  variant="outlined"
+                />
+                <Chip
+                  className={classes.chip}
+                  label={
+                    <p>
+                      Coût de{" "}
+                      <span className={classes.valueImportant}>
+                        {totalCost}
+                      </span>{" "}
+                      euros
+                    </p>
+                  }
+                  variant="outlined"
                 />
                 <p className={classes.description}>
-                    { DESCRIPTION_MEMBER[member.username] || DESCRIPTION_DEFAULT}
+                  {DESCRIPTION_MEMBER[member.username] || DESCRIPTION_DEFAULT}
                 </p>
                 <a href={`https://gitlab.com/${member.username}`}>
                   <Button color="primary" round>
