@@ -7,7 +7,7 @@ exports.issueFilter = ({
   labels,
   assignee,
   web_url: webUrl,
-  time_stats: { time_estimate: estimatedTime },
+  time_stats: { time_estimate: estimatedTime }
 }) => ({
   id,
   iid,
@@ -17,7 +17,7 @@ exports.issueFilter = ({
   labels,
   assigneeId: assignee ? assignee.id : null,
   webUrl,
-  estimatedTime,
+  estimatedTime
 });
 
 exports.mrFilter = ({
