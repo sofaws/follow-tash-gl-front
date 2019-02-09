@@ -10,7 +10,7 @@ const TasksController = require("./controllers/TasksController");
 const GitlabController = require("./controllers/GitlabController");
 
 // Constants
-const port = 8080;
+const port = process.env.PORT || 8080;
 
 // Instances
 const app = new Koa();

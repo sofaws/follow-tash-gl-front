@@ -15,7 +15,10 @@ const {
   memberFilter
 } = require("./utils/filter");
 
-const client = got.extend({ json: true, baseUrl: "http://127.0.0.1:8080" });
+const client = got.extend({
+  json: true,
+  baseUrl: `http://127.0.0.1:${process.env.PORT || "8080"}`
+});
 
 cron.schedule("*/10 * * * * *", async () => {
   console.log("Task start");
