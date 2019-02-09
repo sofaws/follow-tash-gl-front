@@ -8,6 +8,7 @@
     "start:front": "react-scripts start",
     "start:server": "node server/api.js",
     "start:cron": "node ./server/cron.js",
+    "start": "node server/api.js & node ./server/cron.js",
     "dev:server": "nodemon ./server/cron.js",
     "build": "react-scripts build && cp build/index.html build/404.html",
     "test": "react-scripts test --env=jsdom",
