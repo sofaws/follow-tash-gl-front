@@ -20,23 +20,23 @@
     "flow": "flow"
   },
   "dependencies": {
-    "@koa/cors": "2",
+    "@koa/cors": "2.2.3",
     "@material-ui/core": "3.9.2",
     "@material-ui/icons": "3.0.1",
     "chartist": "0.10.1",
     "classnames": "2.2.6",
     "date-fns": "1.29.0",
-    "dotenv": "6.1.0",
+    "dotenv": "6.2.0",
     "flow-bin": "0.89.0",
-    "gl-got": "9.0.2",
-    "got": "9.3.2",
-    "koa": "2.6.2",
+    "gl-got": "9.0.3",
+    "got": "9.6.0",
+    "koa": "2.7.0",
     "koa-bodyparser": "4.2.1",
     "koa-router": "7.4.0",
     "koache": "1.0.2",
     "ky": "0.5.1",
     "lowdb": "1.0.0",
-    "moment": "^2.24.0",
+    "moment": "2.24.0",
     "node-cache": "4.2.0",
     "node-cron": "2.0.3",
     "perfect-scrollbar": "1.4.0",
@@ -72,10 +72,9 @@
     "eslint-plugin-promise": "4.0.1",
     "eslint-plugin-react": "7.12.4",
     "eslint-plugin-standard": "4.0.0",
-    "jest": "23.6.0"
-  },
-  "optionalDependencies": {
-    "prettier": "1.14.3"
+    "jest": "24.1.0",
+    "prettier": "1.14.3",
+    "supertest": "3.4.2"
   },
   "browserslist": [
     ">0.2%",
