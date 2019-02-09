@@ -10,8 +10,25 @@ const client = glGot.extend({
   }
 });
 
-exports.fetchIssues = async ({ state } = { state: "opened" }) => {
-  return (await client(`projects/${projectId}/issues?state=${state}`)).body;
+const clientIssues = page =>
+  client.extend({
+    query: {
+      milestone: process.env.MILESTONE,
+      page
+    }
+  });
+
+exports.fetchIssues = async () => {
+  return getAllPageIssues();
+};
+
+const getAllPageIssues = async (page = 1, data = []) => {
+  const res = await clientIssues(page)(`projects/${projectId}/issues`);
+  const nextPage = res.headers["x-next-page"];
+  if (nextPage) {
+    return getAllPageIssues(nextPage, [...data, ...res.body]);
+  }
+  return [...data, ...res.body];
 };
 
 exports.fetchMrs = async () => {

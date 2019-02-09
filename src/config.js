@@ -21,24 +21,24 @@ export const TYPES = ["Front", "Back", "BugFix", "Autres"];
  * @type {string[]}
  */
 export const LOTS = [
-    "Séminaire",
-    "Restaurant",
-    "Multilingue",
-    "Accueil",
-    "Légal",
-    "Accueil Back-office",
-    "Atlas",
-    "Authentification",
-    "Bons Plans",
-    "Accueil",
-    "Cercle",
-    "Culture & Loisirs",
-    "Composant générique",
-    "Droits Admin",
-    "Fidélité",
-    "Entity",
-    "Historique",
-    "Hôtel"
+  "Séminaire",
+  "Restaurant",
+  "Multilingue",
+  "Accueil",
+  "Légal",
+  "Accueil Back-office",
+  "Atlas",
+  "Authentification",
+  "Bons Plans",
+  "Accueil",
+  "Cercle",
+  "Culture & Loisirs",
+  "Composant générique",
+  "Droits Admin",
+  "Fidélité",
+  "Entity",
+  "Historique",
+  "Hôtel"
 ];
 
 /**
@@ -46,13 +46,13 @@ export const LOTS = [
  * @type {string[]}
  */
 export const ILOTS = [
-    "Ilot des Receptionnistes",
-    "Ilot des Cuistos",
-    "Ilot des Business-Man",
-    "Ilot des Bonnes Affaires",
-    "Ilot de la Fidélisation",
-    "Ilot Tout-Terrain",
-    "Ilot Connexion"
+  "Ilot des Receptionnistes",
+  "Ilot des Cuistos",
+  "Ilot des Business-Man",
+  "Ilot des Bonnes Affaires",
+  "Ilot de la Fidélisation",
+  "Ilot Tout-Terrain",
+  "Ilot Connexion"
 ];
 
 /**
@@ -60,7 +60,6 @@ export const ILOTS = [
  * @type {number}
  */
 export const TIME_TO_RELOAD = 1;
-
 
 /**
  * GESTION OF COST
@@ -71,16 +70,16 @@ const MANAGER_COST = 100;
 
 export const DEFAULT_COST_BY_HOUR = DEVELOPPER_COST;
 export const OTHERS_COST = {
-    "sofaws": MANAGER_COST,
+  sofaws: MANAGER_COST
 };
 
 /**
  * DESCRIPTION DES DEVELOPPEURS
  */
-export const DESCRIPTION_DEFAULT = "Un grand développeur, comme tous les autres..";
+export const DESCRIPTION_DEFAULT =
+  "Un grand développeur, comme tous les autres..";
 export const DESCRIPTION_MEMBER = {
-    "sofaws": "Le plus grand développeur de G4",
-    "aifedespaix": "Le plus nul développeur de G4..",
-    "MaximeBlanc": "recherche un homme pas très futé",
+  sofaws: "Le plus grand développeur de G4",
+  aifedespaix: "Le plus nul développeur de G4..",
+  MaximeBlanc: "recherche un homme pas très futé"
 };
-

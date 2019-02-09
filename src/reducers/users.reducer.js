@@ -1,7 +1,6 @@
-import { createSelector } from "reselect";
-import {getSumConsumed} from "utils/ManagementHelper";
+import {createSelector} from "reselect";
+import {calculCost, getSumConsumed} from "utils/ManagementHelper";
 import {DEFAULT_COST_BY_HOUR, OTHERS_COST} from "../config";
-import {calculCost} from "utils/ManagementHelper";
 
 ////////////////////
 //  Action types  //
@@ -28,12 +27,19 @@ export const fetchUsersFailure = error => {
 ///////////////
 //  Reducer  //
 ///////////////
-const uniqify = (array, key, subKey) => array.reduce((prev, curr) => prev.find(a => a[key][subKey] === curr[key][subKey]) ? prev : prev.push(curr) && prev, []);
+const uniqify = (array, key, subKey) =>
+  array.reduce(
+    (prev, curr) =>
+      prev.find(a => a[key][subKey] === curr[key][subKey])
+        ? prev
+        : prev.push(curr) && prev,
+    []
+  );
 
 const usersReducer = (state = initialState, action) => {
   switch (action.type) {
     case USERS_FETCH_SUCCESS: {
-      return uniqify(action.users, 'member', 'id');
+      return uniqify(action.users, "member", "id");
     }
     default: {
       return [...state];
@@ -52,24 +58,26 @@ export const getUserById = (state, props) => {
   return state.find(user => user.member.id === Number(props.id));
 };
 
-export const getConsumedByUser = createSelector(
-    [getUserById],
-    (user) => {
-      if (!user) return 0;
-      return user.tasks.reduce((acc, task) => {
-          if(!task.consumedTime || !task.consumedTime[user.member.username]) return acc;
-          return acc + task.consumedTime[user.member.username].time
-      }, 0)
-    }
-);
+export const getConsumedByUser = createSelector([getUserById], user => {
+  if (!user) return 0;
+  return user.tasks.reduce((acc, task) => {
+    if (!task.consumedTime || !task.consumedTime[user.member.username])
+      return acc;
+    return acc + task.consumedTime[user.member.username].time;
+  }, 0);
+});
 
 export const getCostByUser = createSelector(
-    [getConsumedByUser, getUserById],
-    (consomned, user) => {
-        if (!user) return 0;
-        return calculCost(consomned, OTHERS_COST[user.member.username] || DEFAULT_COST_BY_HOUR);
-    }
+  [getConsumedByUser, getUserById],
+  (consomned, user) => {
+    if (!user) return 0;
+    return Math.round(
+      calculCost(
+        consomned,
+        OTHERS_COST[user.member.username] || DEFAULT_COST_BY_HOUR
+      )
+    );
+  }
 );
-
 
 export default usersReducer;
