@@ -15,7 +15,8 @@
     "build-package": "babel src --out-dir dist",
     "postinstall": "babel ./node_modules/ky/index.js --out-file ./node_modules/ky/index.js --config-file=./.babelrc",
     "flow": "flow",
-    "dev": "nodemon server/api.js"
+    "api": "nodemon server/api.js",
+    "cron": "nodemon server/cron.js"
   },
   "dependencies": {
     "@koa/cors": "2",

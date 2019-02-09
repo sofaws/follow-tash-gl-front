@@ -17,8 +17,10 @@ const {
 
 const client = got.extend({ json: true, baseUrl: "http://127.0.0.1:8080" });
 
-cron.schedule("*/10 * * * * *", async () => {
-  console.log("Task start");
+fetchIssues().then(data => console.log(data.length));
+
+//cron.schedule("*/10 * * * * *", async () => {
+/* console.log("Task start");
   const issues = (await fetchIssues()).map(issueFilter);
   const mrs = (await fetchMrs()).map(mrFilter);
   const members = (await fetchMembers()).map(memberFilter);
@@ -46,3 +48,4 @@ cron.schedule("*/10 * * * * *", async () => {
 
   console.log("Task end");
 });
+*/
