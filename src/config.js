@@ -78,8 +78,15 @@ export const OTHERS_COST = {
  */
 export const DESCRIPTION_DEFAULT =
   "Un grand développeur, comme tous les autres..";
+
 export const DESCRIPTION_MEMBER = {
   sofaws: "Le plus grand développeur de G4",
   aifedespaix: "Le plus nul développeur de G4..",
   MaximeBlanc: "recherche un homme pas très futé"
 };
+
+/**
+ * Time to alert the user who haven't put imputations.
+ * @type {number[]}
+ */
+export const TIMES_IMPUTATIONS = [11, 15, 18];

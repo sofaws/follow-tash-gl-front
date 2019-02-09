@@ -1,3 +1,5 @@
+import { TIMES_IMPUTATIONS } from "../config";
+
 /**
  * Transform second to human date (eg. 23h39)
  * @param d (number)
@@ -12,4 +14,15 @@ export function secondsToHms(d: number) {
   const hDisplay = h > 0 ? `${h}h` : "00h";
   const mDisplay = m > 0 ? m : "00";
   return hDisplay + mDisplay;
+}
+
+export function getActiveHour(hour: number) {
+  let plageActive = TIMES_IMPUTATIONS.reduce((acc, time) => {
+    if (time <= hour) {
+      return time;
+    }
+    return acc;
+  }, null);
+  if (!plageActive) plageActive = TIMES_IMPUTATIONS[TIMES_IMPUTATIONS.length];
+  return plageActive;
 }

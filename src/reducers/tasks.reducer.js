@@ -71,7 +71,7 @@ export const getTotalRaf = createSelector([getAllTasks], tasks =>
 export const getTotalProgess = createSelector(
   [getAllTasks, getTotalConsumed, getTotalRaf],
   (tasks, consumedTotal, remainingTime) =>
-    getProgress(consumedTotal, remainingTime)
+    Math.round(getProgress(consumedTotal, remainingTime))
 );
 
 export const getTotalEstimated = createSelector([getAllTasks], tasks =>

@@ -1,6 +1,12 @@
-import {createSelector} from "reselect";
-import {calculCost, getSumConsumed} from "utils/ManagementHelper";
-import {DEFAULT_COST_BY_HOUR, OTHERS_COST} from "../config";
+import { createSelector } from "reselect";
+import { calculCost, getSumConsumed } from "utils/ManagementHelper";
+import {
+  DEFAULT_COST_BY_HOUR,
+  OTHERS_COST,
+  TIMES_IMPUTATIONS
+} from "../config";
+import moment from "moment";
+import { getActiveHour } from "utils/TimeHelper";
 
 ////////////////////
 //  Action types  //
@@ -57,6 +63,32 @@ export const getAllUsers = state => state;
 export const getUserById = (state, props) => {
   return state.find(user => user.member.id === Number(props.id));
 };
+
+export const getUsersNotImputed = createSelector([getAllUsers], users => {
+  if (!users) return [];
+  return users.filter(user => {
+    if (!user.lastDateImputation) return true;
+    const current = {
+      date: moment().date(),
+      hour: moment().hour()
+    };
+    const lastImputation = {
+      date: moment(user.lastDateImputation).date(),
+      hour: moment(user.lastDateImputation).hour()
+    };
+
+    const activeHour = getActiveHour(current.hour);
+
+    if (
+      lastImputation.hour >= activeHour - 1 &&
+      (current.date === lastImputation.date ||
+        activeHour === TIMES_IMPUTATIONS[TIMES_IMPUTATIONS.length])
+    ) {
+      return false;
+    }
+    return true;
+  });
+});
 
 export const getConsumedByUser = createSelector([getUserById], user => {
   if (!user) return 0;

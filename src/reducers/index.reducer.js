@@ -29,6 +29,7 @@ export const getTotalEstimated = state => fromTasks.getTotalEstimated(state.task
 export const getTotalSkid = state => fromTasks.getTotalSkid(state.tasks);
 
 export const getAllUsers = state => fromUsers.getAllUsers(state.users);
+export const getUsersNotImputed = state => fromUsers.getUsersNotImputed(state.users);
 export const getUserById = (state, props) =>
   fromUsers.getUserById(state.users, props);
 export const getConsumedByUser = (state, props) => fromUsers.getConsumedByUser(state.users, props);
