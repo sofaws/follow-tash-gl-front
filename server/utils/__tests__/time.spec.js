@@ -5,14 +5,14 @@ const {
 } = require("../time");
 
 describe("utils/time", () => {
-  it("convertHumanTimeToSeconds", () => {
+  xit("convertHumanTimeToSeconds", () => {
     expect(convertHumanTimeToSeconds("3h")).toBe(10800);
     expect(convertHumanTimeToSeconds("3h01")).toBe(10860);
     expect(convertHumanTimeToSeconds("3h1")).toBe(10860);
     expect(convertHumanTimeToSeconds("0h30")).toBe(1800);
   });
 
-  it("getRemainingTimes", () => {
+  xit("getRemainingTimes", () => {
     const comments = [
       {
         id: 120028750,
@@ -50,7 +50,7 @@ describe("utils/time", () => {
     });
   });
 
-  it("getSpentTimes", () => {
+  xit("getSpentTimes", () => {
     const comments = [
       {
         id: 119394924,

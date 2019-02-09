@@ -35,4 +35,6 @@ router.post("/gitlab/comments", GitlabController.setComments);
 
 app.use(router.routes()).use(router.allowedMethods());
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+const server = app.listen(port, () => console.log(`Listening on port ${port}`));
+
+module.exports = server;
