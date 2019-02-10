@@ -2,18 +2,13 @@ const request = require("supertest");
 const server = require("../api.js");
 
 describe("basic route tests", () => {
-  beforeAll(async () => {
-    console.log("Jest starting!");
-  });
-
   afterAll(() => {
     server.close();
-    console.log("server closed!");
   });
 
-  test("get home route GET /", async () => {
-    const response = await request(server).get("/tesks");
+  test("the route GET /tasks", async () => {
+    const response = await request(server).get("/tasks");
     expect(response.status).toEqual(200);
-    // expect(response.text).toContain("Hello World!");
+    expect(response.body).toEqual([]);
   });
 });
