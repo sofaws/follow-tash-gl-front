@@ -1,12 +1,8 @@
-import { createSelector } from "reselect";
-import { calculCost, getSumConsumed } from "utils/ManagementHelper";
-import {
-  DEFAULT_COST_BY_HOUR,
-  OTHERS_COST,
-  TIMES_IMPUTATIONS
-} from "../config";
+import {createSelector} from "reselect";
+import {calculCost, getSumConsumed} from "utils/ManagementHelper";
+import {DEFAULT_COST_BY_HOUR, EXCLUDE_MEMBERS, OTHERS_COST, TIMES_IMPUTATIONS} from "../config";
 import moment from "moment";
-import { getActiveHour } from "utils/TimeHelper";
+import {getActiveHour} from "utils/TimeHelper";
 
 ////////////////////
 //  Action types  //
@@ -59,12 +55,15 @@ const initialState = [];
 //  Selectors  //
 /////////////////
 export const getAllUsers = state => state;
+export const getUsersFiltered = createSelector([getAllUsers], users => {
+  return users.filter(user => !EXCLUDE_MEMBERS.includes(user.member.username));
+});
 
 export const getUserById = (state, props) => {
   return state.find(user => user.member.id === Number(props.id));
 };
 
-export const getUsersNotImputed = createSelector([getAllUsers], users => {
+export const getUsersNotImputed = createSelector([getUsersFiltered], users => {
   if (!users) return [];
   return users.filter(user => {
     if (!user.lastDateImputation) return true;
@@ -82,7 +81,8 @@ export const getUsersNotImputed = createSelector([getAllUsers], users => {
     if (
       lastImputation.hour >= activeHour - 1 &&
       (current.date === lastImputation.date ||
-        activeHour === TIMES_IMPUTATIONS[TIMES_IMPUTATIONS.length])
+        (activeHour === TIMES_IMPUTATIONS[TIMES_IMPUTATIONS.length] &&
+          current.date - 1 === lastImputation.date ))
     ) {
       return false;
     }

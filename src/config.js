@@ -90,3 +90,30 @@ export const DESCRIPTION_MEMBER = {
  * @type {number[]}
  */
 export const TIMES_IMPUTATIONS = [11, 15, 18];
+
+/**
+ * Members who are excluded from the non-affection list and not imputed list
+ * @type {Array}
+ */
+export const EXCLUDE_MEMBERS = [
+  "busbot",
+  "le-boss-du-69",
+  "sofaws",
+  "aifedespaix",
+  "Shosho",
+  "Benbb96",
+  "MaximeBlanc",
+  "rebolaxx",
+  "Gogoal",
+  "jeremymartinperso",
+  "Bobtomses",
+  "LMBK",
+  "kevtro",
+  "cedric.scys",
+  "pduthoit",
+  "JulieL",
+  "manierka",
+  "OceanWave06",
+  "Jeremy84",
+  "RochezBaptiste"
+];

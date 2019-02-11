@@ -1,9 +1,8 @@
-import { combineReducers } from "redux";
+import {combineReducers} from "redux";
 import tasksReducer, * as fromTasks from "./tasks.reducer";
 import usersReducer, * as fromUsers from "./users.reducer";
 import syncReducer, * as fromSync from "./sync.reducer";
-import { createSelector } from "reselect";
-import {getIlotTask} from "../utils/TaskHelper";
+import {createSelector} from "reselect";
 
 export default combineReducers({
   tasks: tasksReducer,
@@ -29,6 +28,7 @@ export const getTotalEstimated = state => fromTasks.getTotalEstimated(state.task
 export const getTotalSkid = state => fromTasks.getTotalSkid(state.tasks);
 
 export const getAllUsers = state => fromUsers.getAllUsers(state.users);
+export const getUsersFiltered = state => fromUsers.getUsersFiltered(state.users);
 export const getUsersNotImputed = state => fromUsers.getUsersNotImputed(state.users);
 export const getUserById = (state, props) =>
   fromUsers.getUserById(state.users, props);
@@ -44,7 +44,7 @@ export const getSyncLoading = state => fromSync.getSyncLoading(state.sync);
 ////////////////////////
 
 export const getNotAssignedUsers = createSelector(
-  [getAllUsers, getAllTasks],
+  [getUsersFiltered, getAllTasks],
   (users, tasks) => {
     return users.filter(user => !tasks.find(task => task.assigneeId === user.member.id));
   }
