@@ -8,6 +8,7 @@ const bodyParser = require("koa-bodyparser");
 const MembersController = require("./controllers/MembersController");
 const TasksController = require("./controllers/TasksController");
 const GitlabController = require("./controllers/GitlabController");
+const SheetController = require("./controllers/SheetController");
 
 // Constants
 const port = process.env.PORT || 8080;
@@ -27,6 +28,9 @@ router.get("/tasks/:id", TasksController.getTask);
 
 router.get("/members", MembersController.getMembers);
 router.get("/members/:id", MembersController.getMember);
+
+router.get("/sheet/times", SheetController.getTimes);
+router.get("/sheet/tasks", SheetController.getTasks);
 
 router.post("/gitlab/members", GitlabController.setMembers);
 router.post("/gitlab/issues", GitlabController.setIssues);
