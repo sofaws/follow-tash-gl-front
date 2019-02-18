@@ -3,6 +3,8 @@ const Router = require("koa-router");
 const cors = require("@koa/cors");
 // const cache = require('koache')
 const bodyParser = require("koa-bodyparser");
+const socketio = require("socket.io");
+require("dotenv").config();
 
 // Controllers
 const MembersController = require("./controllers/MembersController");
@@ -15,8 +17,11 @@ const port = process.env.PORT || 8080;
 
 // Instances
 const app = new Koa();
+const server = require("http").createServer(app.callback());
 const router = new Router();
-// TODO: increase TTL
+const io = socketio(server);
+
+require("./socket.js")(io);
 
 app.use(bodyParser());
 app.use(cors());
@@ -39,4 +44,4 @@ router.post("/gitlab/comments", GitlabController.setComments);
 
 app.use(router.routes()).use(router.allowedMethods());
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+server.listen(port, () => console.log(`Listening on port ${port}`));
