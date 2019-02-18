@@ -135,6 +135,7 @@ class PublicDashboard extends React.Component {
             </GridContainer>
           </GridItem>
           <GridItem md={5}>
+            <h1>#SpeedCodingG4</h1>
             <TweetList />
           </GridItem>
         </GridContainer>

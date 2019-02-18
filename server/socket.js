@@ -9,7 +9,7 @@ let twitter = new Twitter({
 
 module.exports = function socket(io) {
   io.of("tweet");
-  twitter.stream("statuses/filter", { track: "lyon" }, function(stream) {
+  twitter.stream("statuses/filter", { track: "SpeedCodingG4" }, function(stream) {
     stream.on("data", function(data) {
       io.sockets.emit("tweet", data);
     });
