@@ -31,14 +31,25 @@ class SheetController {
 
   getTasks(ctx) {
     const issues = Issue.list();
+    const times = Time.list();
+    console.log(times);
 
     const teamRegex = /[iI][lL][oOôÔ][tT] ([0-9]+)/i;
     const lotRegex = /[lL][oO][tT] ([0-9]+).*/i;
 
-    const formatedTasks = issues.map(({ iid, title, state, labels }) => {
+    const formatedTasks = issues.map(({ id, iid, title, state, labels }) => {
       const team = labels.find(label => teamRegex.test(label));
       const lot = labels.find(label => lotRegex.test(label));
-      return { id: iid, title, state, team, lot };
+      const time = times.find(time => time.id === id);
+
+      return {
+        id: iid,
+        title,
+        state,
+        team: team ? team : null,
+        lot: lot ? lot : null,
+        remainingTime: time ? time.remainingTime : null
+      };
     });
     ctx.body = formatedTasks;
   }
