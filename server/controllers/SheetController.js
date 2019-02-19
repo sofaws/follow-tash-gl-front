@@ -6,17 +6,19 @@ const config = require("../config");
 class SheetController {
   getTimes(ctx) {
     const times = Time.list();
+    const issues = Issue.list();
 
     const formatedTimes = times.reduce(
-      (acc, { iid, consumedTime, remainingTime }) => {
+      (acc, { id, consumedTime, remainingTime }) => {
         const developpersKeys = Object.keys(consumedTime);
+        const issue = issues.find(issue => issue.id === id);
 
         const inputs = developpersKeys.reduce((secondAcc, developpersKey) => {
           const input = consumedTime[developpersKey];
           return [
             ...secondAcc,
             {
-              id: iid,
+              id: issue.iid,
               remainingTime,
               username: input.user.username,
               time: input.time
