@@ -1,11 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Link, withRouter } from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Icon from "@material-ui/core/Icon";
 import Store from "@material-ui/icons/Store";
 import Accessibility from "@material-ui/icons/Accessibility";
-
 // core components
 import GridItem from "components/Grid/GridItem.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
@@ -17,9 +16,18 @@ import CardBody from "components/Card/CardBody.jsx";
 import CardFooter from "components/Card/CardFooter.jsx";
 
 import dashboardStyle from "assets/jss/material-dashboard-react/views/dashboardStyle.jsx";
-import { getStatus } from "utils/TaskHelper";
-import { connect } from "react-redux";
-import { getAllTasks, getTotalConsumed, getNotAssignedUsers, getTotalCost, getTotalEstimated, getTotalRaf, getTotalSkid, getTotalProgess } from "reducers/index.reducer";
+import {getStatus} from "utils/TaskHelper";
+import {connect} from "react-redux";
+import {
+    getAllTasks,
+    getNotAssignedUsers,
+    getTotalConsumed,
+    getTotalCost,
+    getTotalEstimated,
+    getTotalProgess,
+    getTotalRaf,
+    getTotalSkid
+} from "reducers/index.reducer";
 import {secondsToHms} from "utils/TimeHelper";
 import BoxNumber from "components/BoxNumber/BoxNumber";
 
@@ -33,7 +41,20 @@ class Dashboard extends React.Component {
   };
 
   render() {
-    const { classes, history, tasks, usersNotAssigned, totalConsumedTime, totalCost, totalProgess, totalRaf, totalEstimated, totalSkid } = this.props;
+    const {
+      classes,
+      history,
+      tasks,
+      usersNotAssigned,
+      totalConsumedTime,
+      totalCost,
+      totalProgess,
+      totalRaf,
+      totalEstimated,
+      totalSkid
+    } = this.props;
+
+
     return (
       <div>
         <GridContainer>
@@ -84,11 +105,7 @@ class Dashboard extends React.Component {
                 <p className={classes.cardCategory}>
                   Développeurs non assignés
                 </p>
-                <h3 className={classes.cardTitle}>
-                  {
-                    usersNotAssigned.length
-                  }
-                </h3>
+                <h3 className={classes.cardTitle}>{usersNotAssigned.length}</h3>
               </CardHeader>
               <CardFooter stats>
                 <div className={classes.stats}>
@@ -152,12 +169,30 @@ class Dashboard extends React.Component {
                 </p>
               </CardHeader>
               <CardBody>
-                  <BoxNumber title={`${Math.round(totalProgess * 100)}%`} description={"d'avancement sur le projet"}/>
-                  <BoxNumber title={secondsToHms(totalRaf)} description={"de RAF"}/>
-                  <BoxNumber title={secondsToHms(totalConsumedTime)} description={"consommées sur le projet."}/>
-                  <BoxNumber title={secondsToHms(totalEstimated)} description={"estimées sur le projet."}/>
-                  <BoxNumber title={`${totalCost} euros`} description={"consommés sur le projet."}/>
-                  <BoxNumber title={secondsToHms(totalSkid)} description={"de dérapage sur le projet"}/>
+                <BoxNumber
+                  title={`${Math.round(totalProgess * 100)}%`}
+                  description={"d'avancement sur le projet"}
+                />
+                <BoxNumber
+                  title={secondsToHms(totalRaf)}
+                  description={"de RAF"}
+                />
+                <BoxNumber
+                  title={secondsToHms(totalConsumedTime)}
+                  description={"consommées sur le projet."}
+                />
+                <BoxNumber
+                  title={secondsToHms(totalEstimated)}
+                  description={"estimées sur le projet."}
+                />
+                <BoxNumber
+                  title={`${totalCost} euros`}
+                  description={"consommés sur le projet."}
+                />
+                <BoxNumber
+                  title={secondsToHms(totalSkid)}
+                  description={"de dérapage sur le projet"}
+                />
               </CardBody>
             </Card>
           </GridItem>
@@ -181,7 +216,7 @@ function mapStateToProps(state) {
     totalProgess: getTotalProgess(state),
     totalEstimated: getTotalEstimated(state),
     totalRaf: getTotalRaf(state),
-    totalSkid: getTotalSkid(state),
+    totalSkid: getTotalSkid(state)
   };
 }
 
