@@ -20,10 +20,9 @@ class MembersController {
           /@(\w+) ?: ?(\d{1,2}h(?:\d{1,2})?)/gm,
           comment.body
         );
-        if (!matches) {
+        if (!matches || !matches.length) {
           return acc;
         }
-        console.log(matches);
         const username = matches[0][1];
 
         if (username === member.username) {
