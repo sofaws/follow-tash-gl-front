@@ -1,6 +1,8 @@
 const Time = require("../models/Time");
 const Issue = require("../models/Issue");
 
+const config = require("../config");
+
 class SheetController {
   getTimes(ctx) {
     const times = Time.list();
@@ -33,12 +35,9 @@ class SheetController {
     const issues = Issue.list();
     const times = Time.list();
 
-    const teamRegex = /[iI][lL][oOôÔ][tT] .+/i;
-    const lotRegex = /[lL][oO][tT] .+/i;
-
     const formatedTasks = issues.map(({ id, iid, title, state, labels }) => {
-      const team = labels.find(label => teamRegex.test(label));
-      const lot = labels.find(label => lotRegex.test(label));
+      const team = labels.find(label => config.ILOTS.includes(label));
+      const lot = labels.find(label => config.LOTS.includes(label));
       const time = times.find(time => time.id === id);
 
       return {
