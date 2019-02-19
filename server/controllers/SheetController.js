@@ -6,7 +6,7 @@ class SheetController {
     const times = Time.list();
 
     const formatedTimes = times.reduce(
-      (acc, { id, consumedTime, remainingTime }) => {
+      (acc, { iid, consumedTime, remainingTime }) => {
         const developpersKeys = Object.keys(consumedTime);
 
         const inputs = developpersKeys.reduce((secondAcc, developpersKey) => {
@@ -14,7 +14,7 @@ class SheetController {
           return [
             ...secondAcc,
             {
-              id,
+              id: iid,
               remainingTime,
               username: input.user.username,
               time: input.time
@@ -31,14 +31,24 @@ class SheetController {
 
   getTasks(ctx) {
     const issues = Issue.list();
+    const times = Time.list();
 
     const teamRegex = /[iI][lL][oOôÔ][tT] ([0-9]+)/i;
     const lotRegex = /[lL][oO][tT] ([0-9]+).*/i;
 
-    const formatedTasks = issues.map(({ iid, title, state, labels }) => {
+    const formatedTasks = issues.map(({ id, iid, title, state, labels }) => {
       const team = labels.find(label => teamRegex.test(label));
       const lot = labels.find(label => lotRegex.test(label));
-      return { id: iid, title, state, team, lot };
+      const time = times.find(time => time.id === id);
+
+      return {
+        id: iid,
+        title,
+        state,
+        team: team ? team : null,
+        lot: lot ? lot : null,
+        remainingTime: time ? time.remainingTime : null
+      };
     });
     ctx.body = formatedTasks;
   }

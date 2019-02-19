@@ -23,7 +23,6 @@ class MembersController {
         if (!matches || !matches.length) {
           return acc;
         }
-
         const username = matches[0][1];
 
         if (username === member.username) {
