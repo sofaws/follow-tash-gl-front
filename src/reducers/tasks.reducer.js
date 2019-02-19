@@ -3,7 +3,7 @@
 ////////////////////
 import {createSelector} from "reselect";
 import {calculCost, getCostOfListTasks, getProgress, getSkid, getSumConsumed} from "utils/ManagementHelper";
-import {getIlotTask, getLotTask} from "utils/TaskHelper";
+import {getIlotTask, getLotTask, getStatus} from "utils/TaskHelper";
 
 export const TASKS_FETCH_REQUEST = "TASKS_FETCH_REQUEST";
 const TASKS_FETCH_SUCCESS = "TASKS_FETCH_SUCCESS";
@@ -49,6 +49,9 @@ export const getTaskById = (state, props) => {
   return state.find(task => task.id === Number(props.id));
 };
 
+export const getTasksNotClose = createSelector([getAllTasks], tasks =>
+  tasks.filter(task => getStatus(task.labels, task.state) !== "closed")
+);
 export const getTotalConsumed = createSelector([getAllTasks], tasks =>
   tasks.reduce((acc, task) => acc + getSumConsumed(task.consumedTime), 0)
 );

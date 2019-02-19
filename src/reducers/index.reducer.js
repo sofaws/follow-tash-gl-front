@@ -16,6 +16,7 @@ export default combineReducers({
 //////////////////////////
 
 export const getAllTasks = state => fromTasks.getAllTasks(state.tasks);
+export const getTasksNotClose = state => fromTasks.getTasksNotClose(state.tasks);
 export const getTaskById = (state, props) =>
   fromTasks.getTaskById(state.tasks, props);
 export const getTotalConsumed = state => fromTasks.getTotalConsumed(state.tasks);
@@ -44,7 +45,7 @@ export const getSyncLoading = state => fromSync.getSyncLoading(state.sync);
 ////////////////////////
 
 export const getNotAssignedUsers = createSelector(
-  [getUsersFiltered, getAllTasks],
+  [getUsersFiltered, getTasksNotClose],
   (users, tasks) => {
     return users.filter(user => !tasks.find(task => task.assigneeId === user.member.id));
   }
