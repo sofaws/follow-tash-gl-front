@@ -35,20 +35,23 @@ class SheetController {
     const issues = Issue.list();
     const times = Time.list();
 
-    const formatedTasks = issues.map(({ id, iid, title, state, labels }) => {
-      const team = labels.find(label => config.ILOTS.includes(label));
-      const lot = labels.find(label => config.LOTS.includes(label));
-      const time = times.find(time => time.id === id);
+    const formatedTasks = issues.map(
+      ({ id, iid, title, state, labels, estimatedTime }) => {
+        const team = labels.find(label => config.ILOTS.includes(label));
+        const lot = labels.find(label => config.LOTS.includes(label));
+        const time = times.find(time => time.id === id);
 
-      return {
-        id: iid,
-        title,
-        state,
-        team: team ? team : null,
-        lot: lot ? lot : null,
-        remainingTime: time ? time.remainingTime : null
-      };
-    });
+        return {
+          id: iid,
+          title,
+          state,
+          team: team ? team : null,
+          lot: lot ? lot : null,
+          remainingTime: time ? time.remainingTime : null,
+          estimatedTime
+        };
+      }
+    );
     ctx.body = formatedTasks;
   }
 }
