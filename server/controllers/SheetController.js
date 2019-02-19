@@ -13,6 +13,9 @@ class SheetController {
         const developpersKeys = Object.keys(consumedTime);
         const issue = issues.find(issue => issue.id === id);
 
+        const team = issue.labels.find(label => config.ILOTS.includes(label));
+        const lot = issue.labels.find(label => config.LOTS.includes(label));
+
         const inputs = developpersKeys.reduce((secondAcc, developpersKey) => {
           const input = consumedTime[developpersKey];
           return [
@@ -21,7 +24,9 @@ class SheetController {
               id: issue.iid,
               remainingTime,
               username: input.user.username,
-              time: input.time
+              time: input.time,
+              team,
+              lot
             }
           ];
         }, []);
