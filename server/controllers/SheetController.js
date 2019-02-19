@@ -33,8 +33,8 @@ class SheetController {
     const issues = Issue.list();
     const times = Time.list();
 
-    const teamRegex = /[iI][lL][oOôÔ][tT] ([0-9]+)/i;
-    const lotRegex = /[lL][oO][tT] ([0-9]+).*/i;
+    const teamRegex = /[iI][lL][oOôÔ][tT] .+/i;
+    const lotRegex = /[lL][oO][tT] .+/i;
 
     const formatedTasks = issues.map(({ id, iid, title, state, labels }) => {
       const team = labels.find(label => teamRegex.test(label));
