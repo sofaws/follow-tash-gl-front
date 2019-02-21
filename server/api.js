@@ -21,7 +21,7 @@ const server = require("http").createServer(app.callback());
 const router = new Router();
 const io = socketio(server);
 
-// require("./socket.js")(io);
+require("./socket.js")(io);
 
 app.use(bodyParser());
 app.use(cors());

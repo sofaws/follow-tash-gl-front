@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {withRouter} from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Icon from "@material-ui/core/Icon";
 import Store from "@material-ui/icons/Store";
@@ -14,21 +14,21 @@ import CardBody from "components/Card/CardBody.jsx";
 import CardFooter from "components/Card/CardFooter.jsx";
 
 import dashboardStyle from "assets/jss/material-dashboard-react/views/dashboardStyle.jsx";
-import {getStatus} from "utils/TaskHelper";
-import {connect} from "react-redux";
+import { getStatus } from "utils/TaskHelper";
+import { connect } from "react-redux";
 import {
-    getAllTasks,
-    getNotAssignedUsers,
-    getTotalConsumed,
-    getTotalCost,
-    getTotalEstimated,
-    getTotalProgess,
-    getTotalRaf,
-    getTotalSkid,
-    getUsersNotImputed
+  getAllTasks,
+  getNotAssignedUsers,
+  getTotalConsumed,
+  getTotalCost,
+  getTotalEstimated,
+  getTotalProgess,
+  getTotalRaf,
+  getTotalSkid,
+  getUsersNotImputed
 } from "reducers/index.reducer";
-import {secondsToHms} from "utils/TimeHelper";
-import {startSync} from "reducers/sync.reducer";
+import { secondsToHms } from "utils/TimeHelper";
+import { startSync } from "reducers/sync.reducer";
 import Avatar from "@material-ui/core/es/Avatar/Avatar";
 import TweetList from "components/TweetList/TweetList";
 
@@ -60,7 +60,7 @@ class PublicDashboard extends React.Component {
                     </CardIcon>
                     <p className={classes.cardCategory}>Avancement du projet</p>
                     <h3 className={classes.cardTitle}>
-                      {totalProgess} <small>%</small>
+                      {Math.round(totalProgess)} <small>%</small>
                     </h3>
                   </CardHeader>
                   <CardFooter stats>
