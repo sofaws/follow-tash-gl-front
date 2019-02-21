@@ -53,6 +53,8 @@ exports.commentFilter = ({
     return;
   }
 
+  console.log("updatedAt -->", updatedAt);
+
   return {
     id,
     body,

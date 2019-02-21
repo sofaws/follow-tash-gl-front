@@ -1,5 +1,6 @@
 const Time = require("../models/Time");
 const Issue = require("../models/Issue");
+const Comment = require("../models/Comment");
 
 const config = require("../config");
 
@@ -7,11 +8,13 @@ class SheetController {
   getTimes(ctx) {
     const times = Time.list();
     const issues = Issue.list();
+    const comments = Comment.list();
 
     const formatedTimes = times.reduce(
       (acc, { id, consumedTime, remainingTime }) => {
         const developpersKeys = Object.keys(consumedTime);
         const issue = issues.find(issue => issue.id === id);
+        const comment = comments.find(comment => comment.noteableId === id);
 
         const team = issue.labels.find(label => config.ILOTS.includes(label));
         const lot = issue.labels.find(label => config.LOTS.includes(label));
@@ -26,7 +29,8 @@ class SheetController {
               username: input.user.username,
               time: input.time,
               team,
-              lot
+              lot,
+              updatedAt: comment.updatedAt
             }
           ];
         }, []);
