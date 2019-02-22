@@ -65,12 +65,30 @@ export const TIME_TO_RELOAD = 1;
  * GESTION OF COST
  */
 
-const DEVELOPPER_COST = 60;
-const MANAGER_COST = 100;
+const DEVELOPPER_COST = 25;
+const INGENIOR_COST = 35;
+const MANAGER_COST = 60;
 
 export const DEFAULT_COST_BY_HOUR = DEVELOPPER_COST;
 export const OTHERS_COST = {
-  sofaws: MANAGER_COST
+  sofaws: MANAGER_COST,
+  RochezBaptiste: MANAGER_COST,
+  Jeremy84: MANAGER_COST,
+  kevtro: MANAGER_COST,
+  Gogoal: MANAGER_COST,
+  benbb96: INGENIOR_COST,
+  "cedric.scys": INGENIOR_COST,
+  jeremymartinperso: INGENIOR_COST,
+  aifedespaix: INGENIOR_COST,
+  LMBK: INGENIOR_COST,
+  manierka: INGENIOR_COST,
+  maximeblanc: INGENIOR_COST,
+  rebolaxx: INGENIOR_COST,
+  oceanwave06: INGENIOR_COST,
+  shosho: INGENIOR_COST,
+  juliel: INGENIOR_COST,
+  Bobtomses: INGENIOR_COST,
+  pduthoit: INGENIOR_COST
 };
 
 /**
