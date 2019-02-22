@@ -5,7 +5,13 @@ const SPENT_TIME = /@([\w.]+) ?: ?(\d{1,2}[h:](?:\d{1,2})?)/gm;
 const REMAINNING_TIME = /RAF ?: ?(\d{1,2}[h:](?:\d{1,2})?)/gm;
 
 const convertHumanTimeToSeconds = time => {
-  const [hours, minutes = 0] = time.split("h");
+  if (time.includes("h")) {
+    const [hours, minutes = 0] = time.split("h");
+
+    return hours * 60 * 60 + minutes * 60;
+  }
+
+  const [hours, minutes = 0] = time.split(":");
 
   return hours * 60 * 60 + minutes * 60;
 };
