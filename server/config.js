@@ -17,7 +17,8 @@ module.exports = {
     "Fidélité",
     "Entity",
     "Historique",
-    "Hôtel"
+    "Hôtel",
+    "Page Globale"
   ],
 
   ILOTS: [
@@ -27,6 +28,7 @@ module.exports = {
     "Ilot des Bonnes Affaires",
     "Ilot de la Fidélisation",
     "Ilot Tout-Terrain",
-    "Ilot Connexion"
+    "Ilot Connexion",
+    "Ilot Responsive"
   ]
 };
