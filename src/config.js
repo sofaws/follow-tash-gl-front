@@ -38,7 +38,8 @@ export const LOTS = [
   "Fidélité",
   "Entity",
   "Historique",
-  "Hôtel"
+  "Hôtel",
+  "Page Globale"
 ];
 
 /**
