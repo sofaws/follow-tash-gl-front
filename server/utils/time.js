@@ -1,8 +1,8 @@
 const { getAllMatches } = require("./javascript");
 const Member = require("../models/Member");
 
-const SPENT_TIME = /@([\w.]+) ?: ?(\d{1,2}[h:](?:\d{1,2})?)/gm;
-const REMAINNING_TIME = /RAF ?: ?(\d{1,2}[h:](?:\d{1,2})?)/gm;
+const SPENT_TIME = /@([\w.]+) *: *(\d{1,2}[h:](?:\d{1,2})?)/gm;
+const REMAINNING_TIME = /RAF *: *(\d{1,2}[h:](?:\d{1,2})?)/gm;
 
 const convertHumanTimeToSeconds = time => {
   if (time.includes("h")) {
