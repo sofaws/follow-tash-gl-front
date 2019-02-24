@@ -1,3 +1,4 @@
+const moment = require("moment");
 const Time = require("../models/Time");
 const Issue = require("../models/Issue");
 const Comment = require("../models/Comment");
@@ -30,7 +31,7 @@ class SheetController {
               time: input.time,
               team,
               lot,
-              updatedAt: comment.updatedAt
+              updatedAt: moment(comment.updatedAt).calendar()
             }
           ];
         }, []);
