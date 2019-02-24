@@ -31,7 +31,7 @@ class SheetController {
               time: input.time,
               team,
               lot,
-              updatedAt: moment(comment.updatedAt).calendar()
+              updatedAt: moment(comment.updatedAt).format("DD-MM-YYYY")
             }
           ];
         }, []);
