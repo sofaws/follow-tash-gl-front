@@ -54,7 +54,8 @@ export const ILOTS = [
   "Ilot de la Fidélisation",
   "Ilot Tout-Terrain",
   "Ilot Connexion",
-  "Ilot Responsive"
+  "Ilot Responsive",
+  "TMA"
 ];
 
 /**
