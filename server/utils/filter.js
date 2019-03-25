@@ -8,7 +8,7 @@ exports.issueFilter = ({
   assignee,
   web_url: webUrl,
   time_stats: { time_estimate: estimatedTime },
-  milestone: { title: milestoneTitlte }
+  milestone
 }) => ({
   id,
   iid,
@@ -19,7 +19,7 @@ exports.issueFilter = ({
   assigneeId: assignee ? assignee.id : null,
   webUrl,
   estimatedTime,
-  milestoneTitlte
+  milestoneTitlte: milestone ? milestone.title : null
 });
 
 exports.mrFilter = ({
