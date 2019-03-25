@@ -13,7 +13,7 @@ const client = glGot.extend({
 const clientIssues = page =>
   client.extend({
     query: {
-      milestone: process.env.MILESTONE,
+      // milestone: process.env.MILESTONE,
       page
     }
   });

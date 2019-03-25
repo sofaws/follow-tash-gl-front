@@ -11,15 +11,17 @@ class TasksController {
     const issues = Issue.list();
     const times = Time.list();
 
-    const enhancedIssues = issues.map(issue => {
-      const member = Member.find({ id: issue.assigneeId });
-      const time = times.filter(time => time.id === issue.id);
-      return {
-        ...issue,
-        ...time[0],
-        assignee: member
-      };
-    });
+    const enhancedIssues = issues
+      .map(issue => {
+        const member = Member.find({ id: issue.assigneeId });
+        const time = times.filter(time => time.id === issue.id);
+        return {
+          ...issue,
+          ...time[0],
+          assignee: member
+        };
+      })
+      .filter(p => p.milestoneTitlte === "P6");
 
     ctx.body = enhancedIssues;
   }
