@@ -16,7 +16,7 @@ const {
   memberFilter
 } = require("./utils/filter");
 
-const baseUrl `http://127.0.0.1:${process.env.PORT || "8080"}`
+const baseUrl = `http://127.0.0.1:${process.env.PORT || "8080"}`;
 
 const client = got.extend({
   json: true,
