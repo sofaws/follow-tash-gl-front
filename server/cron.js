@@ -16,6 +16,8 @@ const {
   memberFilter
 } = require("./utils/filter");
 
+const baseUrl `http://127.0.0.1:${process.env.PORT || "8080"}`
+
 const client = got.extend({
   json: true,
   baseUrl: `http://127.0.0.1:${process.env.PORT || "8080"}`
@@ -40,10 +42,10 @@ cron.schedule("*/10 * * * * *", async () => {
     .filter(Boolean);
 
   try {
-    axios.post("http://localhost:8080/gitlab/issues", issues);
-    axios.post("http://localhost:8080/gitlab/mrs", mrs);
-    axios.post("http://localhost:8080/gitlab/members", members);
-    axios.post("http://localhost:8080/gitlab/comments", comments);
+    axios.post(`${baseUrl}/gitlab/issues`, issues);
+    axios.post(`${baseUrl}/gitlab/mrs`, mrs);
+    axios.post(`${baseUrl}/gitlab/members`, members);
+    axios.post(`${baseUrl}/gitlab/comments`, comments);
     // client.post("/gitlab/members", { body: members });
     // client.post("/gitlab/mrs", { body: mrs });
     // client.post("/gitlab/issues", { body: issues });
