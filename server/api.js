@@ -4,6 +4,7 @@ const cors = require("@koa/cors");
 // const cache = require('koache')
 const bodyParser = require("koa-bodyparser");
 const socketio = require("socket.io");
+const db = require("./db");
 require("dotenv").config();
 
 // Controllers
@@ -41,6 +42,10 @@ router.post("/gitlab/members", GitlabController.setMembers);
 router.post("/gitlab/issues", GitlabController.setIssues);
 router.post("/gitlab/mrs", GitlabController.setMrs);
 router.post("/gitlab/comments", GitlabController.setComments);
+
+router.get("/logs", ctx => {
+  ctx.body = db.getState();
+});
 
 app.use(router.routes()).use(router.allowedMethods());
 
