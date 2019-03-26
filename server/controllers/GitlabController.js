@@ -18,6 +18,7 @@ class GitlabController {
   }
 
   setIssues(ctx) {
+    console.log("sa mere la tchoin");
     const issues = ctx.request.body;
     try {
       Issue.set(issues);

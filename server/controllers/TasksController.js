@@ -21,7 +21,7 @@ class TasksController {
           assignee: member
         };
       })
-      .filter(p => p.milestoneTitlte === "P6" || p.milestoneTitlte === "P5");
+      .filter(p => p.milestoneTitle === "P6" || p.milestoneTitle === "P5");
 
     ctx.body = enhancedIssues;
   }

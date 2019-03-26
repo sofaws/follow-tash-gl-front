@@ -9,18 +9,20 @@ exports.issueFilter = ({
   web_url: webUrl,
   time_stats: { time_estimate: estimatedTime },
   milestone
-}) => ({
-  id,
-  iid,
-  title,
-  description,
-  state,
-  labels,
-  assigneeId: assignee ? assignee.id : null,
-  webUrl,
-  estimatedTime,
-  milestoneTitlte: milestone ? milestone.title : null
-});
+}) => {
+  return {
+    id,
+    iid,
+    title,
+    description,
+    state,
+    labels,
+    assigneeId: assignee ? assignee.id : null,
+    webUrl,
+    estimatedTime,
+    milestoneTitle: milestone !== null ? milestone.title : null
+  };
+};
 
 exports.mrFilter = ({
   id,
@@ -54,8 +56,6 @@ exports.commentFilter = ({
   if (!body.trim().startsWith("[TIME]")) {
     return;
   }
-
-  console.log("updatedAt -->", updatedAt);
 
   return {
     id,

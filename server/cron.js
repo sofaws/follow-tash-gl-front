@@ -1,5 +1,6 @@
 const got = require("got");
 const cron = require("node-cron");
+const axios = require("axios");
 require("dotenv").config();
 
 const {
@@ -39,10 +40,14 @@ cron.schedule("*/10 * * * * *", async () => {
     .filter(Boolean);
 
   try {
-    client.post("/gitlab/members", { body: members });
-    client.post("/gitlab/mrs", { body: mrs });
-    client.post("/gitlab/issues", { body: issues });
-    client.post("/gitlab/comments", { body: comments });
+    axios.post("http://localhost:8080/gitlab/issues", issues);
+    axios.post("http://localhost:8080/gitlab/mrs", mrs);
+    axios.post("http://localhost:8080/gitlab/members", members);
+    axios.post("http://localhost:8080/gitlab/comments", comments);
+    // client.post("/gitlab/members", { body: members });
+    // client.post("/gitlab/mrs", { body: mrs });
+    // client.post("/gitlab/issues", { body: issues });
+    // client.post("/gitlab/comments", { body: comments });
   } catch (error) {
     console.error(`ah merde ${error}`);
   }
