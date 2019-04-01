@@ -79,7 +79,9 @@ export function getCostOfListTasks(tasks) {
         if (!task.consumedTime) return acc;
         Object.values(task.consumedTime).forEach(element => {
           if(element.user == undefined){
-             console.log(element);
+            console.log("--------------------------------------------------------------------------------------");
+            console.log(element);            
+            console.log("--------------------------------------------------------------------------------------");
              }
             acc = acc + calculCost(element.time, OTHERS_COST[element.user.username] || DEFAULT_COST_BY_HOUR);
         });
