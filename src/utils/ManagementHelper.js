@@ -78,7 +78,7 @@ export function getCostOfListTasks(tasks) {
     return tasks.reduce((acc, task) => {
         if (!task.consumedTime) return acc;
         Object.values(task.consumedTime).forEach(element => {
-          if(element.length = 1 ){
+          if(element.length = 0 ){
             console.log("--------------------------------------------------------------------------------------");
             console.log(element);            
             console.log("--------------------------------------------------------------------------------------");
