@@ -79,12 +79,14 @@ const getSpentTimes = comments => {
     const spentTimes = matches.reduce((acc, match) => {
       const username = match[1];
       const spentTime = match[2];
+      const user = Member.findByUsername(username);
 
       return {
         ...acc,
         [username]: {
           time: convertHumanTimeToSeconds(spentTime),
-          user: Member.findByUsername(username)
+          // user: Object.keys(user).length !== 0 ?  Member.findByUsername(username) : {username}
+          user: user ? user : { username }
         }
       };
     }, {});
